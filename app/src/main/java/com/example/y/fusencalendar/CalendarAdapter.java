@@ -99,8 +99,9 @@ public class CalendarAdapter extends BaseAdapter {
 
     //表示月を取得
     public String getTitle(){
-        SimpleDateFormat format = new SimpleDateFormat("yyyy.MM", Locale.US);
-        return format.format(mDateManager.mCalendar.getTime());
+//        SimpleDateFormat format = new SimpleDateFormat("yyyy.MM", Locale.US);
+//        return format.format(mDateManager.mCalendar.getTime());
+        return "hello";
     }
 
     //翌月取得

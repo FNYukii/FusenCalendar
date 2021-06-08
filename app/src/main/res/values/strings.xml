@@ -1,9 +1,16 @@
 <resources>
+
     <string name="app_name">ふせんカレンダー</string>
 
+    <!-- BottomNavigation item -->
     <string name="title_calendar">カレンダー</string>
     <string name="title_fusen">ふせん</string>
     <string name="title_setting">設定</string>
+
+    <!-- SettingFragment -->
+    <string name="setting_menu_slide">カレンダーのスライドの向き</string>
+    <string name="setting_menu_alarm">イベント通知時間</string>
+    <string name="setting_menu_help">使い方ガイド</string>
 
 
 </resources>

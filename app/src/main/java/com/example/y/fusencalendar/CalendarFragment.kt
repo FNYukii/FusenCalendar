@@ -25,27 +25,30 @@ class CalendarFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        //カレンダーを表示
-        mCalendarAdapter = CalendarAdapter(this.context)
-        calendarGridView.adapter = mCalendarAdapter
-
         //titleTextに表示月をセット
-        monthText.text = mCalendarAdapter.title
+//        monthText.text = mCalendarAdapter.title
 
         //前の月へ移動
         prevButton.setOnClickListener {
             mCalendarAdapter.prevMonth()
-            monthText.text = mCalendarAdapter.title
+//            monthText.text = mCalendarAdapter.title
         }
 
         //次の月へ移動
         nextButton.setOnClickListener {
             mCalendarAdapter.nextMonth()
-            monthText.text = mCalendarAdapter.title
+//            monthText.text = mCalendarAdapter.title
         }
 
+    }
 
+
+    override fun onStart() {
+        super.onStart()
+
+        //カレンダーを表示
+        mCalendarAdapter = CalendarAdapter(this.context)
+        calendarGridView.adapter = mCalendarAdapter
 
     }
 
