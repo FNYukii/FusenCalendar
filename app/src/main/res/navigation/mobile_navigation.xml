@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_first"
-        android:name="com.example.y.fusencalendar.AchievementFragment"
+        android:name="com.example.y.fusencalendar.CalendarFragment"
         android:label="@string/title_calendar"
-        tools:layout="@layout/fragment_achievement" />
+        tools:layout="@layout/fragment_calendar" />
 
     <fragment
         android:id="@+id/navigation_second"
-        android:name="com.example.y.fusencalendar.SearchFragment"
+        android:name="com.example.y.fusencalendar.FusenFragment"
         android:label="@string/title_fusen"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_fusen" />
 
     <fragment
         android:id="@+id/navigation_third"
-        android:name="com.example.y.fusencalendar.LibraryFragment"
+        android:name="com.example.y.fusencalendar.SettingFragment"
         android:label="@string/title_setting"
-        tools:layout="@layout/fragment_library" />
+        tools:layout="@layout/fragment_setting" />
 </navigation>
