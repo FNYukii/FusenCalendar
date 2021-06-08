@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ふせんカレンダー</string>
+
+    <string name="title_calendar">カレンダー</string>
+    <string name="title_fusen">ふせん</string>
+    <string name="title_setting">設定</string>
+
+
+    
+</resources>
