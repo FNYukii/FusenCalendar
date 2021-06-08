@@ -19,5 +19,8 @@
     <color name="blue">#3F51B5</color>
     <color name="red">#E91E63</color>
 
+    <!-- card -->
+    <color name="lime">#C9FF87</color>
+
 
 </resources>

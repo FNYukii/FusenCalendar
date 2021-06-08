@@ -5,8 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.fragment_fusen.*
 
 class FusenFragment : Fragment() {
+
+
+    //RecyclerView用のインスタンス宣言
+    private lateinit var adapter: CustomRecyclerViewAdapter
+    private lateinit var layoutManager: RecyclerView.LayoutManager
 
 
     override fun onCreateView(
@@ -15,6 +23,20 @@ class FusenFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.fragment_fusen, container, false)
     }
+
+
+    override fun onStart() {
+        super.onStart()
+
+        //RecyclerViewを表示
+        layoutManager = GridLayoutManager(context, 2)
+        recyclerView.layoutManager = layoutManager
+        adapter = CustomRecyclerViewAdapter()
+        recyclerView.adapter = this.adapter
+
+
+    }
+
 
 
 }
