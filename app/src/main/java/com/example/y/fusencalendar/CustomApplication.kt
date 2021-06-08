@@ -15,7 +15,7 @@ class CustomApplication : Application() {
             .Builder()
             .deleteRealmIfMigrationNeeded()
             .build()
-        Realm.deleteRealm(realmConfig)
+//        Realm.deleteRealm(realmConfig)
         Realm.setDefaultConfiguration(realmConfig)
 
 
