@@ -46,14 +46,6 @@ class CalendarFragment : Fragment() {
             startActivity(intent)
         }
 
-
-
-    }
-
-
-    override fun onStart() {
-        super.onStart()
-
         //カレンダーを表示
         mCalendarAdapter = CalendarAdapter(this.context)
         calendarGridView.adapter = mCalendarAdapter

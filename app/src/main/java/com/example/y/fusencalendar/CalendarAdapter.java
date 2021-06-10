@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class CalendarAdapter extends BaseAdapter {
     //カスタムセルを拡張したら、ここでWidgetを定義
     private static class ViewHolder {
         public TextView dateText;
+        public RelativeLayout relativeLayout;
     }
 
     public CalendarAdapter(Context context){
@@ -44,9 +46,10 @@ public class CalendarAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if(convertView == null){
-            convertView = mLayoutInflater.inflate(R.layout.calendar_cell, null);
+            convertView = mLayoutInflater.inflate(R.layout.one_calendar_cell, null);
             holder = new ViewHolder();
-            holder.dateText = convertView.findViewById(R.id.dateText);
+            holder.dateText = convertView.findViewById(R.id.titleText);
+            holder.relativeLayout = convertView.findViewById(R.id.relativeLayout);
             convertView.setTag(holder);
         }else {
             holder = (ViewHolder)convertView.getTag();
@@ -60,6 +63,16 @@ public class CalendarAdapter extends BaseAdapter {
         //日付のみ表示させる
         SimpleDateFormat dateFormat = new SimpleDateFormat("d", Locale.US);
         holder.dateText.setText(dateFormat.format(dateArray.get(position)));
+
+        //セルをタップしたら、DailyEventListActivityへ遷移
+        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Todo: DailyEventListActivityへ遷移するIntentを宣言
+                //Todo: putExtraで年月日を付与
+                //Todo: 遷移実行
+            }
+        });
 
         //日曜日は赤色、土曜日は青色で日付を表示する
         int colorId;

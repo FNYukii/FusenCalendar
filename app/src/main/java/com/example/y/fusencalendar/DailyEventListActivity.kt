@@ -23,6 +23,12 @@ class DailyEventListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_daily_event_list)
 
+        //CalendarAdapterから日付情報を受け取る
+        val month = intent.getIntExtra("month", 0)
+        val day = intent.getIntExtra("day", 0)
+        val titleString = month.toString() + "月" + day + "日のイベント"
+        titleText.text = titleString
+
         backButton.setOnClickListener {
             finish()
         }
