@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.realm.Realm
 import io.realm.kotlin.where
-import kotlinx.android.synthetic.main.fragment_calendar.*
 import kotlinx.android.synthetic.main.fragment_fusen_list.*
 
 class FusenListFragment : Fragment() {
@@ -36,7 +35,7 @@ class FusenListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        button.setOnClickListener { view ->
+        floatingButton.setOnClickListener { view ->
             val intent = Intent(this.context, EditFusenActivity::class.java)
             startActivity(intent)
         }
