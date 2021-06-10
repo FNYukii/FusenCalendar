@@ -8,7 +8,9 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.one_fusen.view.*
 
-class FusenRecyclerViewAdapter(): RecyclerView.Adapter<FusenRecyclerViewAdapter.FusenViewHolder>() {
+class FusenRecyclerViewAdapter(
+
+    ): RecyclerView.Adapter<FusenRecyclerViewAdapter.FusenViewHolder>() {
 
 
     class FusenViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
