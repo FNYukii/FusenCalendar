@@ -1,5 +1,6 @@
 package com.example.y.fusencalendar
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -39,6 +40,13 @@ class CalendarFragment : Fragment() {
             mCalendarAdapter.nextMonth()
 //            monthText.text = mCalendarAdapter.title
         }
+
+        dateButton.setOnClickListener {
+            val intent = Intent(this.context, DailyEventListActivity::class.java)
+            startActivity(intent)
+        }
+
+
 
     }
 
