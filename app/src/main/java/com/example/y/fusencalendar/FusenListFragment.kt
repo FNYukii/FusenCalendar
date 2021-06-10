@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.fragment_fusen.*
+import kotlinx.android.synthetic.main.fragment_fusen_list.*
 
-class FusenFragment : Fragment() {
+class FusenListFragment : Fragment() {
 
 
     //RecyclerView用のインスタンス宣言
@@ -21,7 +21,7 @@ class FusenFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_fusen, container, false)
+        return inflater.inflate(R.layout.fragment_fusen_list, container, false)
     }
 
 
