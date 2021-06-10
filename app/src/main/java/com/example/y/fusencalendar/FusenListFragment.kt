@@ -36,8 +36,6 @@ class FusenListFragment : Fragment() {
         //RecyclerViewを表示
         val realmResults = realm.where<Fusen>()
             .findAll()
-
-        //RecyclerViewを表示
         layoutManager = GridLayoutManager(context, 2)
         recyclerView.layoutManager = layoutManager
         adapter = FusenRecyclerViewAdapter(realmResults)

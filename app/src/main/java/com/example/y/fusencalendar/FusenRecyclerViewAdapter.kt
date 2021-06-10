@@ -16,9 +16,9 @@ class FusenRecyclerViewAdapter(
 
 
     class FusenViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val fusenBackground: ConstraintLayout = itemView.fusenBackground
-        val fusenTitleText: TextView = itemView.fusenTitleText
-        val fusenMemoText: TextView = itemView.fusenMemoText
+        val fusenBackground: ConstraintLayout = itemView.eventBackground
+        val fusenTitleText: TextView = itemView.eventTitleText
+        val fusenMemoText: TextView = itemView.eventMemoText
     }
 
 
@@ -39,8 +39,8 @@ class FusenRecyclerViewAdapter(
         //レコードを取得
         val fusen = collection?.get(position)
 
-        holder.itemView.fusenTitleText.text = fusen?.title.toString()
-        holder.itemView.fusenMemoText.text = fusen?.memo.toString()
+        holder.itemView.eventTitleText.text = fusen?.title.toString()
+        holder.itemView.eventMemoText.text = fusen?.memo.toString()
         holder.itemView.setOnClickListener {
             //Todo: Intentを作って、EditActivityへ遷移する
         }
