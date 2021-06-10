@@ -13,7 +13,7 @@ class FusenListFragment : Fragment() {
 
 
     //RecyclerView用のインスタンス宣言
-    private lateinit var adapter: CustomRecyclerViewAdapter
+    private lateinit var adapter: FusenRecyclerViewAdapter
     private lateinit var layoutManager: RecyclerView.LayoutManager
 
 
@@ -31,7 +31,7 @@ class FusenListFragment : Fragment() {
         //RecyclerViewを表示
         layoutManager = GridLayoutManager(context, 2)
         recyclerView.layoutManager = layoutManager
-        adapter = CustomRecyclerViewAdapter()
+        adapter = FusenRecyclerViewAdapter()
         recyclerView.adapter = this.adapter
 
 

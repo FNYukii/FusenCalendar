@@ -6,12 +6,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.one_card.view.*
+import kotlinx.android.synthetic.main.one_fusen.view.*
 
-class CustomRecyclerViewAdapter(): RecyclerView.Adapter<CustomRecyclerViewAdapter.CustomViewHolder>() {
+class FusenRecyclerViewAdapter(): RecyclerView.Adapter<FusenRecyclerViewAdapter.FusenViewHolder>() {
 
 
-    class CustomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    class FusenViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val cardBackground: ConstraintLayout = itemView.cardBackground
         val cardTitleText: TextView = itemView.cardTitleText
         val cardMemoText: TextView = itemView.cardMemoText
@@ -19,10 +19,10 @@ class CustomRecyclerViewAdapter(): RecyclerView.Adapter<CustomRecyclerViewAdapte
     }
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, position: Int): CustomViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, position: Int): FusenViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.one_card, parent, false)
-        return CustomViewHolder(view)
+            .inflate(R.layout.one_fusen, parent, false)
+        return FusenViewHolder(view)
     }
 
 
@@ -31,7 +31,7 @@ class CustomRecyclerViewAdapter(): RecyclerView.Adapter<CustomRecyclerViewAdapte
     }
 
 
-    override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FusenViewHolder, position: Int) {
         holder.itemView.cardTitleText.text = "ゲームする！"
         holder.itemView.cardMemoText.text = "Fallout76\nThe Forest\nGTA5"
         holder.itemView.cardTimeText.text = "12:00"
