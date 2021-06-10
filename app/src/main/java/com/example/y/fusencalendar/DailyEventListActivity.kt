@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import io.realm.Realm
+import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.activity_daily_event_list.*
 import kotlinx.android.synthetic.main.fragment_fusen_list.recyclerView
 
@@ -13,6 +15,8 @@ class DailyEventListActivity : AppCompatActivity() {
     private lateinit var adapter: FusenRecyclerViewAdapter
     private lateinit var layoutManager: RecyclerView.LayoutManager
 
+    //Realmのインスタンスを取得
+    var realm: Realm = Realm.getDefaultInstance()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,11 +32,7 @@ class DailyEventListActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        //RecyclerViewを表示
-        layoutManager = GridLayoutManager(this, 2)
-        recyclerView.layoutManager = layoutManager
-        adapter = FusenRecyclerViewAdapter()
-        recyclerView.adapter = this.adapter
+        //Todo: RecyclerViewを表示
 
     }
 }

@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import io.realm.Realm
+import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.fragment_fusen_list.*
 
 class FusenListFragment : Fragment() {
@@ -15,6 +17,9 @@ class FusenListFragment : Fragment() {
     //RecyclerView用のインスタンス宣言
     private lateinit var adapter: FusenRecyclerViewAdapter
     private lateinit var layoutManager: RecyclerView.LayoutManager
+
+    //Realmのインスタンスを取得
+    var realm: Realm = Realm.getDefaultInstance()
 
 
     override fun onCreateView(
@@ -29,9 +34,13 @@ class FusenListFragment : Fragment() {
         super.onStart()
 
         //RecyclerViewを表示
+        val realmResults = realm.where<Fusen>()
+            .findAll()
+
+        //RecyclerViewを表示
         layoutManager = GridLayoutManager(context, 2)
         recyclerView.layoutManager = layoutManager
-        adapter = FusenRecyclerViewAdapter()
+        adapter = FusenRecyclerViewAdapter(realmResults)
         recyclerView.adapter = this.adapter
 
 

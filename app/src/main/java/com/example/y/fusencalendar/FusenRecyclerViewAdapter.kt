@@ -6,18 +6,19 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import io.realm.OrderedRealmCollection
+import io.realm.RealmRecyclerViewAdapter
 import kotlinx.android.synthetic.main.one_fusen.view.*
 
 class FusenRecyclerViewAdapter(
-
-    ): RecyclerView.Adapter<FusenRecyclerViewAdapter.FusenViewHolder>() {
+    private val collection: OrderedRealmCollection<Fusen>
+    ): RealmRecyclerViewAdapter<Fusen, FusenRecyclerViewAdapter.FusenViewHolder>(collection, true) {
 
 
     class FusenViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val cardBackground: ConstraintLayout = itemView.cardBackground
-        val cardTitleText: TextView = itemView.cardTitleText
-        val cardMemoText: TextView = itemView.cardMemoText
-        val cardTimeText: TextView = itemView.cardTimeText
+        val fusenBackground: ConstraintLayout = itemView.fusenBackground
+        val fusenTitleText: TextView = itemView.fusenTitleText
+        val fusenMemoText: TextView = itemView.fusenMemoText
     }
 
 
@@ -29,14 +30,17 @@ class FusenRecyclerViewAdapter(
 
 
     override fun getItemCount(): Int {
-        return 9
+        return collection.size
     }
 
 
     override fun onBindViewHolder(holder: FusenViewHolder, position: Int) {
-        holder.itemView.cardTitleText.text = "ゲームする！"
-        holder.itemView.cardMemoText.text = "Fallout76\nThe Forest\nGTA5"
-        holder.itemView.cardTimeText.text = "12:00"
+
+        //レコードを取得
+        val fusen = collection?.get(position)
+
+        holder.itemView.fusenTitleText.text = fusen?.title.toString()
+        holder.itemView.fusenMemoText.text = fusen?.memo.toString()
         holder.itemView.setOnClickListener {
             //Todo: Intentを作って、EditActivityへ遷移する
         }

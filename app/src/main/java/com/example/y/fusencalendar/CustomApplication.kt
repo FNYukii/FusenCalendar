@@ -18,6 +18,9 @@ class CustomApplication : Application() {
 //        Realm.deleteRealm(realmConfig)
         Realm.setDefaultConfiguration(realmConfig)
 
+        //ダミーデータ追加
+        InsertData()
+
 
 
     }
