@@ -11,6 +11,10 @@
     <string name="setting_menu_slide">カレンダーのスライドの向き</string>
     <string name="setting_menu_alarm">イベント通知時間</string>
     <string name="setting_menu_help">使い方ガイド</string>
+    <string name="date_Edit">2020/0610/</string>
+    <string name="time_Edit">14:58</string>
+    <string name="title_Edit">タイトル</string>
+    <string name="memo_Edit">メモ</string>
 
 
 </resources>
