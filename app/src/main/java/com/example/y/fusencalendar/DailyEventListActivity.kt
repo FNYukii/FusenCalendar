@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.fragment_fusen_list.recyclerView
 class DailyEventListActivity : AppCompatActivity() {
 
     //RecyclerView用のインスタンス宣言
-//    private lateinit var adapter: EventRecyclerViewAdapter
+    private lateinit var adapter: EventRecyclerViewAdapter
     private lateinit var layoutManager: RecyclerView.LayoutManager
 
     //Realmのインスタンスを取得
@@ -32,13 +32,13 @@ class DailyEventListActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        //RecyclerViewを表示
-//        val realmResults = realm.where<Event>()
-//            .findAll()
-//        layoutManager = GridLayoutManager(this, 2)
-//        recyclerView.layoutManager = layoutManager
-//        adapter = EventRecyclerViewAdapter(realmResults)
-//        recyclerView.adapter = this.adapter
+//        RecyclerViewを表示
+        val realmResults = realm.where<Event>()
+            .findAll()
+        layoutManager = GridLayoutManager(this, 2)
+        recyclerView.layoutManager = layoutManager
+        adapter = EventRecyclerViewAdapter(realmResults)
+        recyclerView.adapter = this.adapter
 
     }
 }
