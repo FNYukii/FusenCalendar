@@ -36,6 +36,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="24dp"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintTop_toBottomOf="@+id/header"
         tools:layout_editor_absoluteX="1dp">
 
@@ -69,6 +71,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="24dp"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
         tools:layout_editor_absoluteX="1dp">
 
@@ -101,6 +105,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="24dp"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         tools:layout_editor_absoluteX="1dp">
 
