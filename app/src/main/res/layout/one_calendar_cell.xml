@@ -2,14 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="70dp">
 
     <TextView
-        android:id="@+id/titleText"
+        android:id="@+id/dateText"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:text="16"
         android:textAlignment="center" />
-
 
 </RelativeLayout>
