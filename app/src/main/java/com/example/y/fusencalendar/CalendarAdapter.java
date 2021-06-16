@@ -49,7 +49,7 @@ public class CalendarAdapter extends BaseAdapter {
             convertView = mLayoutInflater.inflate(R.layout.one_calendar_cell, null);
             holder = new ViewHolder();
             holder.dateText = convertView.findViewById(R.id.titleText);
-            holder.relativeLayout = convertView.findViewById(R.id.relativeLayout);
+//            holder.relativeLayout = convertView.findViewById(R.id.relativeLayout);
             convertView.setTag(holder);
         }else {
             holder = (ViewHolder)convertView.getTag();
