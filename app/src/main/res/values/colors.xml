@@ -15,11 +15,10 @@
     <!-- BottomNavigation item selected -->
     <color name="skyBlue">#03A9F4</color>
 
-    <!-- calendar -->
-    <color name="blue">#3F51B5</color>
-    <color name="red">#E91E63</color>
+    <!-- calendarに使用する色 -->
+    <color name="lightGray">#DDDDDD</color>
 
-    <!-- card -->
+    <!-- eventやfusenの色 -->
     <color name="lime">#C9FF87</color>
 
 

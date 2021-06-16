@@ -48,7 +48,7 @@
             android:background="@color/white"
             android:text="Sun"
             android:textAlignment="center"
-            android:textColor="@color/red" />
+            android:textColor="@color/black" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -108,23 +108,19 @@
             android:background="@color/white"
             android:text="Sat"
             android:textAlignment="center"
-            android:textColor="@color/blue" />
+            android:textColor="@color/black" />
 
     </LinearLayout>
 
 
-    <GridView
-        android:id="@+id/calendarGridView"
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/calendarRecyclerView"
+        android:overScrollMode="never"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/gray"
-        android:numColumns="7"
-        android:verticalSpacing="1dp"
-        android:stretchMode="columnWidth"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dayOfTheWeek"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dayOfTheWeek" />
-
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/prevButton"
@@ -147,17 +143,6 @@
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/prevButton" />
-
-    <Button
-        android:id="@+id/dateButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="8dp"
-        android:text="日付"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/prevButton"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
         android:id="@+id/floatingButton"
