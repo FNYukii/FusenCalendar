@@ -11,9 +11,6 @@ import kotlinx.android.synthetic.main.fragment_fusen_list.recyclerView
 
 class DailyEventListActivity : AppCompatActivity() {
 
-    //RecyclerView用のインスタンス宣言
-    private lateinit var adapter: EventRecyclerViewAdapter
-    private lateinit var layoutManager: RecyclerView.LayoutManager
 
     //Realmのインスタンスを取得
     var realm: Realm = Realm.getDefaultInstance()
@@ -23,28 +20,26 @@ class DailyEventListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_daily_event_list)
 
-        //CalendarAdapterから日付情報を受け取る
-        val month = intent.getIntExtra("month", 0)
-        val day = intent.getIntExtra("day", 0)
-        val titleString = month.toString() + "月" + day + "日のイベント"
-        titleText.text = titleString
+        //CalendarRecyclerViewAdapterから日付情報を受け取る
+        val dateNumber: Int = intent.getIntExtra("dateNumber", 0)
+        val dateString: String? = intent.getStringExtra("dateString")
 
+        //labelTextに、表示日をセット 例: "2021年 6月 16日"
+        labelText.text = dateString
+
+        //backButtonを押すとアクティビティ終了
         backButton.setOnClickListener {
             finish()
         }
 
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-//        RecyclerViewを表示
+        //Todo: 日付が一致するレコードを検索
         val realmResults = realm.where<Event>()
             .findAll()
-        layoutManager = GridLayoutManager(this, 2)
-        recyclerView.layoutManager = layoutManager
-        adapter = EventRecyclerViewAdapter(realmResults)
-        recyclerView.adapter = this.adapter
 
+        //recyclerViewを表示
+        recyclerView.layoutManager = GridLayoutManager(this, 2)
+        recyclerView.adapter = EventRecyclerViewAdapter(realmResults)
     }
+
+
 }
