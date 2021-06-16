@@ -5,13 +5,8 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import io.realm.Realm
-import io.realm.Sort
-import io.realm.kotlin.where
-import kotlinx.android.synthetic.main.one_calendar_cell.view.*
 import kotlinx.android.synthetic.main.one_calendar_cell.view.*
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
