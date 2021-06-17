@@ -15,42 +15,41 @@ import kotlinx.android.synthetic.main.fragment_fusen_list.*
 class FusenListFragment : Fragment() {
 
 
-    //RecyclerView用のインスタンス宣言
-    private lateinit var adapter: FusenRecyclerViewAdapter
-    private lateinit var layoutManager: RecyclerView.LayoutManager
-
     //Realmのインスタンスを取得
     var realm: Realm = Realm.getDefaultInstance()
 
 
+    //Fragmentを生成開始
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_fusen_list, container, false)
-
-
     }
 
+
+    //Fragment生成後
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        floatingButton.setOnClickListener { view ->
+        //floatingButtonを押すと、EditFusenActivityへ遷移する
+        floatingButton.setOnClickListener {
             val intent = Intent(this.context, EditFusenActivity::class.java)
             startActivity(intent)
         }
     }
 
+
     override fun onStart() {
         super.onStart()
 
-        //RecyclerViewを表示
+        //Fusenテーブルの全レコードを変数realmResultsに取得
         val realmResults = realm.where<Fusen>()
             .findAll()
-        layoutManager = GridLayoutManager(context, 2)
-        recyclerView.layoutManager = layoutManager
-        adapter = FusenRecyclerViewAdapter(realmResults)
-        recyclerView.adapter = this.adapter
+
+        //RecyclerViewを表示
+        recyclerView.layoutManager = GridLayoutManager(context, 2)
+        recyclerView.adapter = FusenRecyclerViewAdapter(realmResults)
     }
 
 }

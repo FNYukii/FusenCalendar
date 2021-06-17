@@ -1,5 +1,7 @@
 package com.example.y.fusencalendar
 
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,7 +9,9 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import io.realm.OrderedRealmCollection
+import io.realm.Realm
 import io.realm.RealmRecyclerViewAdapter
+import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.one_fusen.view.*
 
 class FusenRecyclerViewAdapter(
@@ -37,12 +41,15 @@ class FusenRecyclerViewAdapter(
     override fun onBindViewHolder(holder: FusenViewHolder, position: Int) {
 
         //レコードを取得
-        val fusen = collection?.get(position)
+        val fusen = collection[position]
 
         holder.itemView.eventTitleText.text = fusen?.title.toString()
         holder.itemView.eventMemoText.text = fusen?.memo.toString()
         holder.itemView.setOnClickListener {
-            //Todo: Intentを作って、EditActivityへ遷移する
+            val intent = Intent(it.context, EditFusenActivity::class.java)
+            intent.putExtra("id", fusen?.id)
+            Log.d("hello", "id: ${fusen?.id}")
+            it.context.startActivity(intent)
         }
     }
 
