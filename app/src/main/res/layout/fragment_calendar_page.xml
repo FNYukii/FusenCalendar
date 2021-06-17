@@ -11,6 +11,7 @@
         android:id="@+id/labelText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="YYYY年 M月"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintTop_toTopOf="parent"
@@ -23,6 +24,7 @@
         android:id="@+id/dayOfTheWeek"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/labelText"
         app:layout_constraintStart_toStartOf="parent"
@@ -86,6 +88,14 @@
             android:textColor="@color/black" />
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lightGray"
+        app:layout_constraintTop_toBottomOf="@id/dayOfTheWeek"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 
     <androidx.recyclerview.widget.RecyclerView
