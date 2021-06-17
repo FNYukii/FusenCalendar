@@ -1,5 +1,6 @@
 package com.example.y.fusencalendar
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,12 +42,14 @@ class EventRecyclerViewAdapter(
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
 
         //レコードを取得
-        val fusen = collection?.get(position)
+        val event = collection.get(position)
 
-        holder.itemView.eventTitleText.text = fusen?.title.toString()
-        holder.itemView.eventMemoText.text = fusen?.memo.toString()
+        holder.itemView.eventTitleText.text = event?.title.toString()
+        holder.itemView.eventMemoText.text = event?.memo.toString()
         holder.itemView.setOnClickListener {
-            //Todo: Intentを作って、EditActivityへ遷移する
+            val intent = Intent(it.context, EditEventActivity::class.java)
+            intent.putExtra("eventId", event.id)
+            it.context.startActivity(intent)
         }
     }
 
