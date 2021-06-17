@@ -5,58 +5,55 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.viewpager2.adapter.FragmentStateAdapter
-import kotlinx.android.synthetic.main.fragment_calendar.*
+import kotlinx.android.synthetic.main.fragment_calendar_page.*
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.*
 
+class CalendarPageFragment : Fragment() {
 
-class CalendarFragment : Fragment() {
+
+    //ページ数
+    private val pageSize = Int.MAX_VALUE
 
 
-    //calendarPagerのページ数
-    private val pageSize = Int.MAX_VALUE //約20億
+    //一か月分の日付情報
+    private lateinit var days: Array<LocalDate?>
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_calendar, container, false)
+        return inflater.inflate(R.layout.fragment_calendar_page, container, false)
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //calendarPagerのAdapterとして、CustomPagerAdapterをセット
-        calendarPager.adapter =CustomPagerAdapter(this.context as FragmentActivity)
-        //calendarPagerの開始ページは、真ん中のページ
-        calendarPager.setCurrentItem(pageSize / 2,false)
+        //HistoryFragmentからページ番号を受け取って、当月との差を計算
+        val position = arguments?.getInt("position") ?: 0
+        val offsetMonth: Int = 0 - (pageSize / 2 - position)
 
+        //一ヵ月分の日付情報をDayRecyclerViewAdapterへ渡して、それをcalendarRecyclerViewのAdapterとする
+        days = createDays(offsetMonth)
+        calendarRecyclerView.adapter = CalendarRecyclerViewAdapter(days)
+        calendarRecyclerView.layoutManager = GridLayoutManager(this.context, 7)
+
+        //labelTextに年月のテキストをセット
+        labelText.text = SimpleDateFormat("yyyy年 M月",Locale.JAPANESE).format(Date().apply { offset(month = offsetMonth) })
     }
 
 
-    private inner class CustomPagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
-        override fun getItemCount(): Int {
-            return pageSize
-        }
-        override fun createFragment(position: Int): Fragment {
-            val fragment = CalendarPageFragment()
-            val bundle = Bundle()
-            bundle.putInt("position", position)
-            fragment.arguments = bundle
-            return fragment
-        }
+    private fun Date.offset(month: Int = 0) {
+        time = Calendar.getInstance().apply {
+            add(Calendar.MONTH, month)
+        }.timeInMillis
     }
 
 
-    //一カ月分のLocalDate?型の配列daysを生成するcreateDaysメソッド
-    //例:[null, null, 2021-06-01, 2021-06-02, 2021-06-03,,,,]
-    //daysの要素数は週数が5週の月なら35個、6週の月なら42個
     private fun createDays(offsetMonth: Int):Array<LocalDate?>{
 
         //配列や変数
