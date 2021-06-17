@@ -33,7 +33,7 @@ class SettingFragment : Fragment() {
 
     fun tap(linerLayout: ViewGroup){
         linerLayout.setOnClickListener {
-            val dialog = CnacelDialog("キャンセルしますか？","キャンセル",{
+            val dialog = ConfirmDialog("キャンセルしますか？","キャンセル",{
 
             },"戻る",{})
             dialog.show(parentFragmentManager,"cancell_dialog")
