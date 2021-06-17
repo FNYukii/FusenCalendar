@@ -31,7 +31,6 @@ class CalendarFragment : Fragment() {
         calendarPager.adapter =CustomPagerAdapter(this.context as FragmentActivity)
         //calendarPagerの開始ページは、真ん中のページ
         calendarPager.setCurrentItem(pageSize / 2,false)
-
     }
 
 
