@@ -1,5 +1,6 @@
 package com.example.y.fusencalendar
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -34,6 +35,14 @@ class CalendarFragment : Fragment() {
         calendarPager.setCurrentItem(pageSize / 2,false)
         //calendarPagerのスクロール方向を指定
         calendarPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+
+        //floatingButtonを押すと、新規イベント作成のためにEditEventActivityへ遷移する
+        floatingButton.setOnClickListener {
+            val intent = Intent(this.context, EditEventActivity::class.java)
+            startActivity(intent)
+        }
+
+
     }
 
 

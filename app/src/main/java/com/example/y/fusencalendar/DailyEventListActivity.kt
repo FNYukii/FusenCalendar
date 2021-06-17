@@ -1,5 +1,6 @@
 package com.example.y.fusencalendar
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -30,6 +31,12 @@ class DailyEventListActivity : AppCompatActivity() {
         //backButtonを押すとアクティビティ終了
         backButton.setOnClickListener {
             finish()
+        }
+
+        //floatingButtonを押すと、新規イベント作成のためにEditEventActivityへ遷移する
+        floatingButton.setOnClickListener {
+            val intent = Intent(this, EditEventActivity::class.java)
+            startActivity(intent)
         }
 
         //Todo: 日付が一致するレコードを検索
