@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import io.realm.OrderedRealmCollection
 import io.realm.Realm
@@ -43,8 +44,29 @@ class FusenRecyclerViewAdapter(
         //レコードを取得
         val fusen = collection[position]
 
+        //タイトルとメモの文字列をセット
         holder.itemView.eventTitleText.text = fusen?.title.toString()
         holder.itemView.eventMemoText.text = fusen?.memo.toString()
+
+        //colorIdに応じて、カードの色を設定
+        when(fusen.colorId){
+            0 -> {
+                holder.fusenBackground.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.green))
+            }
+            1 -> {
+                holder.fusenBackground.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.blue))
+            }
+            2 -> {
+                holder.fusenBackground.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.orange))
+            }
+            3 -> {
+                holder.fusenBackground.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.red))
+            }
+            4 -> {
+                holder.fusenBackground.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.purple))
+            }
+        }
+
         holder.itemView.setOnClickListener {
             val intent = Intent(it.context, EditFusenActivity::class.java)
             intent.putExtra("id", fusen?.id)
