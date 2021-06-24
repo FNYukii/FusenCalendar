@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import io.realm.OrderedRealmCollection
 import io.realm.RealmRecyclerViewAdapter
@@ -42,10 +43,32 @@ class EventRecyclerViewAdapter(
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
 
         //レコードを取得
-        val event = collection.get(position)
+        val event = collection[position]
 
+        //タイトルとメモの文字列をセット
         holder.itemView.eventTitleText.text = event?.title.toString()
         holder.itemView.eventMemoText.text = event?.memo.toString()
+
+        //colorIdに応じて、カードの色を設定
+        when(event.colorId){
+            0 -> {
+                holder.eventBackground.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.green))
+            }
+            1 -> {
+                holder.eventBackground.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.blue))
+            }
+            2 -> {
+                holder.eventBackground.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.orange))
+            }
+            3 -> {
+                holder.eventBackground.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.red))
+            }
+            4 -> {
+                holder.eventBackground.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.purple))
+            }
+        }
+
+
         holder.itemView.setOnClickListener {
             val intent = Intent(it.context, EditEventActivity::class.java)
             intent.putExtra("eventId", event.id)
