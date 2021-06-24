@@ -12,7 +12,7 @@ open class Event : RealmObject() {
     var date: Int = 0
     var hour: Int = 0
     var minute: Int = 0
-    var colorId: Int = 3
+    var colorId: Int = 0
     var title: String = ""
     var memo: String = ""
 }
