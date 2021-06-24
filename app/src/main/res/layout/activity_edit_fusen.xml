@@ -6,43 +6,84 @@
     android:layout_height="match_parent"
     tools:context=".EditFusenActivity">
 
-    <EditText
-        android:id="@+id/titleEdit"
+    <!-- 戻るボタン -->
+    <ImageButton
+        android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/title_Edit"
+        app:srcCompat="@drawable/ic_baseline_arrow_back_ios_new_24"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
+    <!-- デリートボタン -->
+    <ImageView
+        android:id="@+id/deleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/line_horizontal_center"
+        app:srcCompat="@drawable/ic_baseline_delete_24" />
+
+    <!-- コピーボタン -->
+    <ImageView
+        android:id="@+id/CopyB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/deleteButton"
+        app:layout_constraintBottom_toBottomOf="@+id/line_horizontal_center"
+        app:srcCompat="@drawable/ic_baseline_content_copy_24" />
+
+    <!-- カラーボタン -->
+    <ImageView
+        android:id="@+id/CollarB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/CopyB"
+        app:layout_constraintBottom_toBottomOf="@+id/line_horizontal_center"
+        app:srcCompat="@drawable/ic_baseline_palette_24" />
+
+    <!-- カレンダーボタン -->
+    <ImageView
+        android:id="@+id/CalendarB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/CollarB"
+        app:layout_constraintBottom_toBottomOf="@+id/line_horizontal_center"
+        app:srcCompat="@drawable/ic_baseline_event_24" />
+
+    <!-- ライン　以下タイトル -->
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:id="@+id/line_horizontal_center"
+        app:layout_constraintTop_toBottomOf="@id/backButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="visible"
+        android:background="@color/cardview_dark_background"/>
+
+
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/titleEdit"
+        app:layout_constraintTop_toBottomOf="@id/line_horizontal_center"
+        app:layout_constraintStart_toStartOf="parent"
+        android:hint="タイトル"
+        android:textSize="36dp"
+        />
+
+    <!-- メモ本文 -->
     <EditText
         android:id="@+id/memoEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/memo_Edit"
+        android:hint="メモ"
+        android:textSize="25dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleEdit" />
-
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="back"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/deleteButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:text="delete"
-        app:layout_constraintEnd_toStartOf="@+id/backButton"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/titleEdit" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
