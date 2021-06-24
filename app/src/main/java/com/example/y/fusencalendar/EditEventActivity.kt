@@ -4,17 +4,13 @@ import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import io.realm.Realm
 import io.realm.kotlin.createObject
 import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.activity_edit_event.*
-import kotlinx.android.synthetic.main.activity_edit_fusen.*
-import kotlinx.android.synthetic.main.activity_edit_fusen.backButton
-import kotlinx.android.synthetic.main.activity_edit_fusen.deleteButton
-import kotlinx.android.synthetic.main.activity_edit_fusen.memoEdit
-import kotlinx.android.synthetic.main.activity_edit_fusen.titleEdit
 
 class EditEventActivity : AppCompatActivity() {
     private lateinit var realm: Realm
@@ -27,6 +23,7 @@ class EditEventActivity : AppCompatActivity() {
         realm = Realm.getDefaultInstance()
 
         val eventId = intent.getIntExtra("eventId", 0)
+        val deleteButton = findViewById<Button>(R.id.deleteButton)
 
         if(eventId > 0){
             val event = realm.where<Event>()
