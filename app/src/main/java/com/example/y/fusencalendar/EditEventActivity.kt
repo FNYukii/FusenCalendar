@@ -23,7 +23,6 @@ class EditEventActivity : AppCompatActivity() {
         realm = Realm.getDefaultInstance()
 
         val eventId = intent.getIntExtra("eventId", 0)
-        val deleteButton = findViewById<Button>(R.id.deleteButton)
 
         if(eventId > 0){
             val event = realm.where<Event>()
