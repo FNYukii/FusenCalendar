@@ -18,8 +18,12 @@
     <!-- calendarの線 -->
     <color name="lightGray">#DDDDDD</color>
 
-    <!-- eventやfusenの色 -->
-    <color name="lime">#C9FF87</color>
+    <!-- eventやfusenのカード色 -->4
+    <color name="green">#C9FF87</color>
+    <color name="blue">#9BD3FF</color>
+    <color name="orange">#FFDC71</color>
+    <color name="red">#FF9D96</color>
+    <color name="purple">#F096FF</color>
 
 
 </resources>
