@@ -13,7 +13,7 @@
     <color name="gray">#AAAAAA</color>
 
     <!-- BottomNavigationの項目(選択時) -->
-    <color name="skyBlue">#3DC3FF</color>
+    <color name="skyBlue">#70B1FF</color>
 
     <!-- calendarの線 -->
     <color name="lightGray">#DDDDDD</color>
