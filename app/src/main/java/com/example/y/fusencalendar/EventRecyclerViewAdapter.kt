@@ -74,7 +74,7 @@ class EventRecyclerViewAdapter(
             }
         }
 
-
+        //クリックされたら編集画面へ遷移
         holder.itemView.setOnClickListener {
             val intent = Intent(it.context, EditEventActivity::class.java)
             intent.putExtra("eventId", event.id)
