@@ -2,9 +2,9 @@ package com.example.y.fusencalendar
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import io.realm.Realm
 import io.realm.Sort
 import io.realm.kotlin.where
@@ -51,6 +51,13 @@ class DailyEventListActivity : AppCompatActivity() {
             .equalTo("date", day)
             .findAll()
             .sort("hour", Sort.ASCENDING, "minute", Sort.ASCENDING)
+
+        //もしレコード数が0なら、画面にメッセージを表示
+        if(realmResults.size == 0){
+            noResultMessageText.visibility = View.VISIBLE
+        }else{
+            noResultMessageText.visibility = View.INVISIBLE
+        }
 
         //recyclerViewを表示
         recyclerView.layoutManager = GridLayoutManager(this, 2)
