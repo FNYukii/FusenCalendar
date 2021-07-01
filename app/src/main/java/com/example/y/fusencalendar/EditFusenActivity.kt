@@ -5,20 +5,20 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.DialogFragment
 import io.realm.Realm
 import io.realm.kotlin.createObject
 import io.realm.kotlin.where
-import kotlinx.android.synthetic.main.activity_edit_event.*
 import kotlinx.android.synthetic.main.activity_edit_fusen.*
-import kotlinx.android.synthetic.main.activity_edit_fusen.backButton
-import kotlinx.android.synthetic.main.activity_edit_fusen.deleteButton
-import kotlinx.android.synthetic.main.activity_edit_fusen.memoEdit
-import kotlinx.android.synthetic.main.activity_edit_fusen.titleEdit
 import java.util.*
 
-class EditFusenActivity : AppCompatActivity() {
+class EditFusenActivity : AppCompatActivity(), ColorDialogFragment.DialogListener {
     private lateinit var realm: Realm
     private var fusenId = 0
+
+    var title: String = ""
+    var memo: String = ""
+    var colorId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +32,6 @@ class EditFusenActivity : AppCompatActivity() {
                 .equalTo("id",fusenId).findFirst()
             titleEdit.setText(fusen?.title.toString())
             memoEdit.setText(fusen?.memo.toString())
-            Toast.makeText(applicationContext, "色は${fusen?.colorId.toString()}番です。", Toast.LENGTH_SHORT).show()
             deleteButton.visibility = View.VISIBLE
         } else{
             deleteButton.visibility = View.INVISIBLE
@@ -52,6 +51,11 @@ class EditFusenActivity : AppCompatActivity() {
             Toast.makeText(applicationContext, "削除しました", Toast.LENGTH_SHORT).show()
             finish()
         }
+
+        colorButton02.setOnClickListener{ v: View? ->
+            val colorDialog = ColorDialogFragment()
+            colorDialog.show(supportFragmentManager, "hello")
+        }
     }
 
     override fun onBackPressed() {
@@ -65,9 +69,7 @@ class EditFusenActivity : AppCompatActivity() {
     }
 
     fun save(){
-        var title: String = "タイトル"
-        var memo: String = "メモ"
-        var colorId: Int = 0
+
         if(titleEdit.text.isNotEmpty() || memoEdit.text.isNotEmpty()) {
             title = titleEdit.text.toString()
             memo = memoEdit.text.toString()
@@ -95,5 +97,9 @@ class EditFusenActivity : AppCompatActivity() {
             Toast.makeText(applicationContext, "保存しました", Toast.LENGTH_SHORT).show()
         }
         finish()
+    }
+
+    override fun onDialogColorIdReceive(dialog: DialogFragment, colorId: Int) {
+        this.colorId = colorId
     }
 }
