@@ -5,11 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.DialogFragment
 
 
-class SettingFragment : Fragment() {
+class SettingFragment : Fragment(),SelectNotificationTimeDialogFragment.DialogListener {
 
 
+    var timeId :Int = -1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,6 +29,11 @@ class SettingFragment : Fragment() {
         val helpText : ViewGroup = view.findViewById(R.id.linearLayout4)
         tap(slideText)
         tap(alarmText)
+
+        alarmText.setOnClickListener {v: View? ->
+            val timeDialog = SelectNotificationTimeDialogFragment()
+            timeDialog.show(parentFragmentManager, "select_time_dialog")
+        }
 
         helpText.setOnClickListener {
             val dialog = ConfirmDialog("キャンセルしますか？","キャンセル",{
@@ -46,4 +53,9 @@ class SettingFragment : Fragment() {
             dialog.show(parentFragmentManager,"cancell_dialog")
         }
     }
+
+    override fun onDialogTimeIdReceive(dialog: DialogFragment, timeId: Int) {
+        this.timeId = timeId
+    }
+
 }
