@@ -20,10 +20,10 @@
 
     <!-- eventやfusenのカード色 -->4
     <color name="green">#C9FF87</color>
-    <color name="blue">#9BD3FF</color>
+    <color name="blue">#B6DFFF</color>
     <color name="orange">#FFDC71</color>
-    <color name="red">#FF9D96</color>
-    <color name="purple">#F096FF</color>
+    <color name="red">#FFB4AF</color>
+    <color name="purple">#F6C1FF</color>
 
 
 </resources>
