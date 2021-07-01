@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
+    <!--<ImageButton
         android:id="@+id/floatingButton"
         android:layout_width="70dp"
         android:layout_height="70dp"
@@ -27,6 +27,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_baseline_add_24" />
+        CalendarFragment.ktのfloatingButton削除に伴いコメントアウトでボタンの削除-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
