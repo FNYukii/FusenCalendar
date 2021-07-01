@@ -46,8 +46,14 @@ class EventRecyclerViewAdapter(
         val event = collection[position]
 
         //タイトルとメモの文字列をセット
-        holder.itemView.eventTitleText.text = event?.title.toString()
-        holder.itemView.eventMemoText.text = event?.memo.toString()
+        holder.eventTitleText.text = event?.title.toString()
+        holder.eventMemoText.text = event?.memo.toString()
+
+        //時刻の文字列をセット
+        val hourString = event?.hour.toString().padStart(2, '0')
+        val minuteString = event?.minute.toString().padStart(2, '0')
+        val timeString = "$hourString:$minuteString"
+        holder.eventDateText.text = timeString
 
         //colorIdに応じて、カードの色を設定
         when(event.colorId){

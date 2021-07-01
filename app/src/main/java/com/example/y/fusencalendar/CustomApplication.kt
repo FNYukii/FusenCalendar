@@ -19,7 +19,7 @@ class CustomApplication : Application() {
         Realm.setDefaultConfiguration(realmConfig)
 
         //ダミーデータ追加
-        InsertData()
+//        InsertData()
 
 
 
