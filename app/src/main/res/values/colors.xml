@@ -12,11 +12,22 @@
     <color name="white">#FFFFFF</color>
     <color name="gray">#AAAAAA</color>
 
-    <!-- BottomNavigationの項目(選択時) -->
-    <color name="skyBlue">#70B1FF</color>
+    <!-- アプリのアクセントカラー -->
+    <color name="appAccentColor">#70B1FF</color>
+    <color name="lightAppAccentColor">#B0D4FF</color>
 
-    <!-- calendarの線 -->
-    <color name="lightGray">#DDDDDD</color>
+    <!-- toolButton pressed -->
+    <color name="translucentGray">#55AAAAAA</color>
+
+
+
+    <!-- 部品の色 -->
+    <color name="appBackground">#FFFFFF</color>
+    <color name="bottomNavigationBackground">#FFFFFF</color>
+
+    <!-- 文字の色 -->
+    <color name="strongText">#000000</color>
+    <color name="weakText">#777777</color>
 
     <!-- eventやfusenのカードの色 -->
     <color name="green">#C9FF87</color>

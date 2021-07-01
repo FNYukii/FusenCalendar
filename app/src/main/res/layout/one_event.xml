@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:text="タイトル"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/black"
+            android:textColor="@color/strongText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -36,6 +36,7 @@
             android:layout_marginTop="8dp"
             android:text="メモ"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/weakText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/eventTitleText" />
@@ -46,6 +47,7 @@
             android:layout_height="wrap_content"
             android:text="19:30"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/weakText"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
