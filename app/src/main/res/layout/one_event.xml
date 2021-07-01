@@ -13,8 +13,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:padding="8dp"
-        android:background="@color/green"
-        android:elevation="5dp"
+        android:background="@drawable/background_card_green"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">

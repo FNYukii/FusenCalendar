@@ -51,19 +51,19 @@ class FusenRecyclerViewAdapter(
         //colorIdに応じて、カードの色を設定
         when(fusen.colorId){
             0 -> {
-                holder.fusenBackground.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.green))
+                holder.fusenBackground.setBackgroundResource(R.drawable.background_card_green)
             }
             1 -> {
-                holder.fusenBackground.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.blue))
+                holder.fusenBackground.setBackgroundResource(R.drawable.background_card_blue)
             }
             2 -> {
-                holder.fusenBackground.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.orange))
+                holder.fusenBackground.setBackgroundResource(R.drawable.background_card_orange)
             }
             3 -> {
-                holder.fusenBackground.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.red))
+                holder.fusenBackground.setBackgroundResource(R.drawable.background_card_red)
             }
             4 -> {
-                holder.fusenBackground.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.purple))
+                holder.fusenBackground.setBackgroundResource(R.drawable.background_card_purple)
             }
         }
 

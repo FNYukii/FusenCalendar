@@ -58,19 +58,19 @@ class EventRecyclerViewAdapter(
         //colorIdに応じて、カードの色を設定
         when(event.colorId){
             0 -> {
-                holder.eventBackground.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.green))
+                holder.eventBackground.setBackgroundResource(R.drawable.background_card_green)
             }
             1 -> {
-                holder.eventBackground.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.blue))
+                holder.eventBackground.setBackgroundResource(R.drawable.background_card_blue)
             }
             2 -> {
-                holder.eventBackground.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.orange))
+                holder.eventBackground.setBackgroundResource(R.drawable.background_card_orange)
             }
             3 -> {
-                holder.eventBackground.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.red))
+                holder.eventBackground.setBackgroundResource(R.drawable.background_card_red)
             }
             4 -> {
-                holder.eventBackground.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.purple))
+                holder.eventBackground.setBackgroundResource(R.drawable.background_card_purple)
             }
         }
 
