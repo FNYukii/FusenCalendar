@@ -39,6 +39,8 @@ class EditFusenActivity : AppCompatActivity(), ColorDialogFragment.DialogListene
 
         backButton.setOnClickListener{ v: View? ->
             save()
+            Toast.makeText(applicationContext, "保存しました", Toast.LENGTH_SHORT).show()
+            finish()
         }
 
         deleteButton.setOnClickListener(){
@@ -56,11 +58,28 @@ class EditFusenActivity : AppCompatActivity(), ColorDialogFragment.DialogListene
             val colorDialog = ColorDialogFragment()
             colorDialog.show(supportFragmentManager, "hello")
         }
+
+        copyButton.setOnClickListener{ v: View? ->
+            save()
+            title = titleEdit.text.toString()
+            memo = memoEdit.text.toString()
+            realm.executeTransaction {
+                val maxId = realm.where<Fusen>().max("id")
+                val nextId = (maxId?.toInt() ?: 0) + 1
+                val Fusen = realm.createObject<Fusen>(nextId)
+                Fusen.title = title + "(コピー)"
+                Fusen.memo = memo
+                Fusen.colorId = colorId
+            }
+            finish()
+        }
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
         save()
+        Toast.makeText(applicationContext, "保存しました", Toast.LENGTH_SHORT).show()
+        finish()
     }
 
     override fun onDestroy() {
@@ -69,7 +88,6 @@ class EditFusenActivity : AppCompatActivity(), ColorDialogFragment.DialogListene
     }
 
     fun save(){
-
         if(titleEdit.text.isNotEmpty() || memoEdit.text.isNotEmpty()) {
             title = titleEdit.text.toString()
             memo = memoEdit.text.toString()
@@ -94,9 +112,9 @@ class EditFusenActivity : AppCompatActivity(), ColorDialogFragment.DialogListene
                     }
                 }
             }
-            Toast.makeText(applicationContext, "保存しました", Toast.LENGTH_SHORT).show()
+        }else{
+            finish()
         }
-        finish()
     }
 
     override fun onDialogColorIdReceive(dialog: DialogFragment, colorId: Int) {
