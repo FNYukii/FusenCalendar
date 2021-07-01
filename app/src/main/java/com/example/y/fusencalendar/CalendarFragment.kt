@@ -35,8 +35,6 @@ class CalendarFragment : Fragment() {
         calendarPager.setCurrentItem(pageSize / 2,false)
         //calendarPagerのスクロール方向を指定
         calendarPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-
-
     }
 
 

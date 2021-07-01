@@ -1,10 +1,13 @@
 package com.example.y.fusencalendar
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.fragment_calendar_page.*
 import java.text.SimpleDateFormat
@@ -17,9 +20,11 @@ class CalendarPageFragment : Fragment() {
     //ページ数
     private val pageSize = Int.MAX_VALUE
 
-
     //一か月分の日付情報
     private lateinit var days: Array<LocalDate?>
+
+    //CalendarRecyclerViewのセルの高さ
+    private var cellheight: Int = 100
 
 
     override fun onCreateView(
@@ -33,23 +38,38 @@ class CalendarPageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //SharedPreferencesのオブジェクトを取得
+        val sharedPref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+
+        //SharedPreferencesに保存していたcellの高さを取得
+        cellheight = sharedPref.getInt("cellHeight", 0)
+
         //HistoryFragmentからページ番号を受け取って、当月との差を計算
         val position = arguments?.getInt("position") ?: 0
         val offsetMonth: Int = 0 - (pageSize / 2 - position)
 
         //一ヵ月分の日付情報をDayRecyclerViewAdapterへ渡して、それをcalendarRecyclerViewのAdapterとする
         days = createDays(offsetMonth)
-        calendarRecyclerView.adapter = CalendarRecyclerViewAdapter(days)
+        calendarRecyclerView.adapter = CalendarRecyclerViewAdapter(days, cellheight)
         calendarRecyclerView.layoutManager = GridLayoutManager(this.context, 7)
 
         //labelTextに年月のテキストをセット
         labelText.text = SimpleDateFormat("yyyy年 M月",Locale.JAPANESE).format(Date().apply { offset(month = offsetMonth) })
+
+        //calendarRecyclerViewのレイアウトが完了後、Viewの高さを取得してRecyclerViewAdapterへ渡す
+        calendarRecyclerView.afterMeasured {
+            cellheight = calendarRecyclerView.height / 6
+            calendarRecyclerView.adapter = CalendarRecyclerViewAdapter(days, cellheight)
+            //セルの高さをSharedPreferencesに保存
+            sharedPref.edit().putInt("cellHeight", cellheight).apply()
+        }
+
     }
 
 
     override fun onStart() {
         super.onStart()
-        calendarRecyclerView.adapter = CalendarRecyclerViewAdapter(days)
+        calendarRecyclerView.adapter = CalendarRecyclerViewAdapter(days, cellheight)
     }
 
 
@@ -99,6 +119,19 @@ class CalendarPageFragment : Fragment() {
 
         //配列daysをreturn
         return days.toTypedArray()
+    }
+
+
+    //Viewのレイアウト完了時に処理を行うための拡張関数
+    private inline fun <T : View> T.afterMeasured(crossinline f: T.() -> Unit) {
+        viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                if (measuredWidth > 0 && measuredHeight > 0) {
+                    viewTreeObserver.removeOnGlobalLayoutListener(this)
+                    f()
+                }
+            }
+        })
     }
 
 
