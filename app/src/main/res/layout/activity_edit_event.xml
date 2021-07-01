@@ -28,8 +28,8 @@
 
         <ImageButton
             android:id="@+id/deleteButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:background="@drawable/background_tool_button"
             android:src="@drawable/ic_baseline_delete_24"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -38,8 +38,8 @@
 
         <ImageButton
             android:id="@+id/colorButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:background="@drawable/background_tool_button"
             android:src="@drawable/ic_baseline_palette_24"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -48,13 +48,21 @@
 
         <ImageButton
             android:id="@+id/addFusenButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:background="@drawable/background_tool_button"
             android:src="@drawable/ic_baseline_bookmark_add_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/colorButton"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/headerBorder"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

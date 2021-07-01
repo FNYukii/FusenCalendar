@@ -5,7 +5,9 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import io.realm.Realm
@@ -16,7 +18,8 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 class CalendarRecyclerViewAdapter(
-    private val days: Array<LocalDate?>
+    private val days: Array<LocalDate?>,
+    private val cellHeight: Int
 ): RecyclerView.Adapter<CalendarRecyclerViewAdapter.CustomViewHolder>() {
 
 
@@ -26,6 +29,7 @@ class CalendarRecyclerViewAdapter(
         val cardImage02: View = itemView.cardImage02
         val cardImage03: View = itemView.cardImage03
         val cardImage04: View = itemView.cardImage04
+        val calendarCellParentLayout: ConstraintLayout = itemView.calendarCellParentLayout
     }
 
 
@@ -48,6 +52,12 @@ class CalendarRecyclerViewAdapter(
         val month = days[position]?.monthValue ?: -1
         val day = days[position]?.dayOfMonth ?: -1
         val realm = Realm.getDefaultInstance()
+
+        //セルの高さを決定
+        val params: ConstraintLayout.LayoutParams = holder.calendarCellParentLayout.layoutParams as ConstraintLayout.LayoutParams
+        params.height = cellHeight
+        holder.calendarCellParentLayout.layoutParams = params
+
 
         //TextViewに値をセット
         if(days[position] == null){

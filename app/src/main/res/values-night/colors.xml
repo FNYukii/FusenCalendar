@@ -4,6 +4,7 @@
     <!-- 部品の色 -->
     <color name="appBackground">#222222</color>
     <color name="bottomNavigationBackground">#333333</color>
+    <color name="headerBorder">#444444</color>
 
     <!-- 文字の色 -->
     <color name="strongText">#FFFFFF</color>
