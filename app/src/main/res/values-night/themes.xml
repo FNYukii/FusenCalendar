@@ -23,6 +23,7 @@
 
         <!-- Navigation Bar -->
         <item name="android:navigationBarColor">@color/appBackground</item>
+        <item name="android:windowLightNavigationBar">true</item>
 
         <!-- App background -->
         <item name="android:windowBackground">@color/appBackground</item>
