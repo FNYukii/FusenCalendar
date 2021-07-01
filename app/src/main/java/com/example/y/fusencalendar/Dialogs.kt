@@ -221,3 +221,58 @@ class ColorDialogFragment: DialogFragment(){
     }
 
 }
+
+
+//時刻を選択するダイアログ
+class SelectNotificationTimeDialogFragment: DialogFragment(){
+
+
+    //EditActivityへTimeIdを渡すためのインターフェース
+    interface DialogListener{
+        fun onDialogTimeIdReceive(dialog: DialogFragment, timeId: Int)
+    }
+    private var listener:DialogListener? = null
+
+    //配列や変数を宣言
+    private val colors = arrayOf("なし", "５分", "１０分", "３０分", "１時間","２時間")
+    private var timeId: Int = -1
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+
+        //dialogをセッティング
+        return activity?.let {
+            val builder = android.app.AlertDialog.Builder(it)
+            builder.setTitle("通知時間を選択")
+                .setSingleChoiceItems(colors, -1){ _, which ->
+                    timeId = which
+                }
+                .setPositiveButton("OK"
+                ) { _, _ ->
+                    //ラジオボタンで時間が選択されていたら、ホストActivityへTimeIdを渡す
+                    if (timeId != -1) {
+                        listener?.onDialogTimeIdReceive(this, timeId)
+                    }
+                }
+                .setNegativeButton("キャンセル"
+                ) { _, _ ->
+                    //do nothing
+                }
+            builder.create()
+        } ?: throw IllegalStateException("Activity cannot be null")
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        try {
+            listener = context as DialogListener
+        }catch (e: Exception){
+            Toast.makeText(this.context, "Error! Can not find listener", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
+    }
+
+}
