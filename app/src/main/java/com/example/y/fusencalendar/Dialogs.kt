@@ -2,10 +2,13 @@ package com.example.y.fusencalendar
 
 import android.app.Dialog
 import android.app.TimePickerDialog
+import android.content.Context
 import android.os.Bundle
 import android.widget.TimePicker
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import java.lang.Exception
 import java.util.*
 
 
@@ -78,34 +81,55 @@ class TimeDialog(private val onSelected:(String) -> Unit):DialogFragment(),TimeP
     }
 }
 
-class ColorSelectDialog(private val message:String,          //ダイアログのタイトル
-                        private val okLable:String,          //OKボタンのラベル
-                        private val okSelected:() -> Unit,   //OKボタンがタップされたときに実行する関数
-                        private val cancelLable:String,      //Cancellボタンのラベル
-                        private val cancellSelected : () -> Unit):DialogFragment(){
 
-    override fun onCreateDialog(savedInstanceState: Bundle?):Dialog {
+class ColorDialogFragment: DialogFragment(){
 
-        //AlertDialog.Builderのインスタンスを生成(引数はダイアログを生成するアクティビティ)
-        //requireActivity()はフラグメントを呼び出したアクティビティを返す
-        val builder = AlertDialog.Builder(requireActivity())
-        //表示するメッセージを設定
-        builder.setMessage(message)
-        //ダイアログに表示する１番目のボタン
-        builder.setPositiveButton(okLable) {
-            //onClickメソッドをSAM変換でラムダ式として記述
-            //dialogタップが発生したダイアログ
-            //whichタップが発生したボタンの種類
-                dialog, which ->
-            okSelected()
-        }
-        //ダイアログに表示する２番めのボタン
-        builder.setNegativeButton(cancelLable) {
-
-                dialog, which ->
-            cancellSelected()
-        }
-        //builderのcreate()メソッドを返しAlertDialogオブジェクトを返す
-        return builder.create()
+    //EditActivityへcolorIdを渡すためのインターフェース
+    interface DialogListener{
+        fun onDialogColorIdReceive(dialog: DialogFragment, colorId: Int)
     }
+    private var listener:DialogListener? = null
+
+    //配列や変数を宣言
+    private val colors = arrayOf("緑", "青", "オレンジ", "赤", "紫")
+    private var colorId: Int = -1
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+
+        //dialogをセッティング
+        return activity?.let {
+            val builder = android.app.AlertDialog.Builder(it)
+            builder.setTitle("色を選択")
+                .setSingleChoiceItems(colors, -1){ _, which ->
+                    colorId = which
+                }
+                .setPositiveButton("OK"
+                ) { _, _ ->
+                    //ラジオボタンで色が選択されていたら、ホストActivityへcolorIdを渡す
+                    if (colorId != -1) {
+                        listener?.onDialogColorIdReceive(this, colorId)
+                    }
+                }
+                .setNegativeButton("キャンセル"
+                ) { _, _ ->
+                    //do nothing
+                }
+            builder.create()
+        } ?: throw IllegalStateException("Activity cannot be null")
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        try {
+            listener = context as DialogListener
+        }catch (e: Exception){
+            Toast.makeText(this.context, "Error! Can not find listener", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
+    }
+
 }
