@@ -3,6 +3,7 @@ package com.example.y.fusencalendar
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -13,7 +14,12 @@ import io.realm.kotlin.createObject
 import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.activity_edit_event.*
 
-class EditEventActivity : AppCompatActivity(), ColorDialogFragment.DialogListener {
+class EditEventActivity :
+    AppCompatActivity(),
+    ColorDialogFragment.DialogListener,
+    DatePickerDialogFragment.OnSelectedDateListener,
+    TimePickerDialogFragment.OnSelectedTimeListener {
+
     private lateinit var realm: Realm
     private var eventId = 0
     var title: String = ""
@@ -40,6 +46,13 @@ class EditEventActivity : AppCompatActivity(), ColorDialogFragment.DialogListene
             memoEdit.setText(event?.memo.toString())
             dateText.setText(event?.year.toString() + "年" + event?.month.toString() + "月" + event?.date.toString() + "日")
             timeText.setText(event?.hour.toString() + "時" + event?.minute.toString() + "分")
+            year = event?.year!!
+            month = event.month
+            date = event.date
+            hour = event.hour
+            minute = event.minute
+
+
             deleteButton.visibility = View.VISIBLE
         } else{
             deleteButton.visibility = View.INVISIBLE
@@ -62,8 +75,22 @@ class EditEventActivity : AppCompatActivity(), ColorDialogFragment.DialogListene
 
         colorButton.setOnClickListener{ v: View? ->
             val colorDialog = ColorDialogFragment()
-            colorDialog.show(supportFragmentManager, "hello")
+            colorDialog.show(supportFragmentManager, "dialog")
         }
+
+        dateText.setOnClickListener {
+            val datePickerDialog = DatePickerDialogFragment()
+            datePickerDialog.show(supportFragmentManager, "dialog")
+        }
+
+        timeText.setOnClickListener {
+            val timePickerDialog = TimePickerDialogFragment()
+            timePickerDialog.show(supportFragmentManager, "dialog")
+        }
+
+
+
+
     }
 
     override fun onBackPressed() {
@@ -121,5 +148,21 @@ class EditEventActivity : AppCompatActivity(), ColorDialogFragment.DialogListene
 
     override fun onDialogColorIdReceive(dialog: DialogFragment, colorId: Int) {
         this.colorId = colorId
+    }
+
+    override fun selectedDate(year: Int, month: Int, date: Int) {
+        Log.d("hello", "year: $year month: $month date: $date")
+        this.year = year
+        this.month = month
+        this.date = date
+        val dateString = year.toString() + "年" + month.toString() + "月" + date.toString() + "日"
+        dateText.text = dateString
+    }
+
+    override fun selectedTime(hour: Int, minute: Int) {
+        this.hour = hour
+        this.minute = minute
+        val timeString = hour.toString() + "時" + minute.toString() + "分"
+        timeText.text = timeString
     }
 }
