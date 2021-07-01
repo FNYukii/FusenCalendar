@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.realm.Realm
+import io.realm.Sort
 import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.activity_daily_event_list.*
 import kotlinx.android.synthetic.main.fragment_fusen_list.recyclerView
@@ -49,6 +50,7 @@ class DailyEventListActivity : AppCompatActivity() {
             .and()
             .equalTo("date", day)
             .findAll()
+            .sort("hour", Sort.ASCENDING, "minute", Sort.ASCENDING)
 
         //recyclerViewを表示
         recyclerView.layoutManager = GridLayoutManager(this, 2)
