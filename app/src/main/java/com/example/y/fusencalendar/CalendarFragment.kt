@@ -37,10 +37,11 @@ class CalendarFragment : Fragment() {
         calendarPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
         //floatingButtonを押すと、新規イベント作成のためにEditEventActivityへ遷移する
-        floatingButton.setOnClickListener {
+        /*floatingButton.setOnClickListener {
             val intent = Intent(this.context, EditEventActivity::class.java)
             startActivity(intent)
-        }
+        }*/
+        //使いにくいためfloatingButton削除（コメントアウト）
 
 
     }
