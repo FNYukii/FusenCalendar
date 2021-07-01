@@ -58,7 +58,9 @@ class CalendarPageFragment : Fragment() {
 
         //calendarRecyclerViewのレイアウトが完了後、Viewの高さを取得してRecyclerViewAdapterへ渡す
         calendarRecyclerView.afterMeasured {
-            cellheight = calendarRecyclerView.height / 6
+            if(calendarRecyclerView != null){
+                cellheight = calendarRecyclerView.height / 6
+            }
             calendarRecyclerView.adapter = CalendarRecyclerViewAdapter(days, cellheight)
             //セルの高さをSharedPreferencesに保存
             sharedPref.edit().putInt("cellHeight", cellheight).apply()
