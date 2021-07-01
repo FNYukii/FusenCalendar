@@ -53,19 +53,12 @@ class CalendarRecyclerViewAdapter(
             if(days[position] != null){
                 val intent = Intent(it.context, DailyEventListActivity::class.java)
 
-                //独自のFormatterを作成
-                val numberFormatter = DateTimeFormatter.ofPattern("yyyyMMdd")
-                val stringFormatter = DateTimeFormatter.ofPattern("yyyy年 M月 d日")
+                //日付情報をintentに付与
+                intent.putExtra("year", days[position]?.year)
+                intent.putExtra("month", days[position]?.monthValue)
+                intent.putExtra("day", days[position]?.dayOfMonth)
 
-                //LocalDate型の日付情報をInt型に変換。 例:20210615 レコード検索に使う。
-                val dateNumber: Int = days[position]?.format(numberFormatter)?.toInt() ?: 0
-
-                //LocalDate型の日付情報をString型に変換。 例:"2021年 6月 15日" labelTextに使う。
-                val dateString: String = days[position]?.format(stringFormatter).toString()
-
-                //日付情報を付与して、intentを実行
-                intent.putExtra("dateNumber", dateNumber)
-                intent.putExtra("dateString", dateString)
+                //intent実行
                 it.context.startActivity(intent)
             }
         }

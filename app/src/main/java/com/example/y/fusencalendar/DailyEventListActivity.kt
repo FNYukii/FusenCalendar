@@ -22,10 +22,12 @@ class DailyEventListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_daily_event_list)
 
         //CalendarRecyclerViewAdapterから日付情報を受け取る
-        val dateNumber: Int = intent.getIntExtra("dateNumber", 0)
-        val dateString: String? = intent.getStringExtra("dateString")
+        val year = intent.getIntExtra("year", -1)
+        val month = intent.getIntExtra("month", -1)
+        val day = intent.getIntExtra("day", -1)
 
         //labelTextに、表示日をセット 例: "2021年 6月 16日"
+        val dateString = year.toString() + "年 " + month.toString() + "月 " + day.toString() + "日"
         labelText.text = dateString
 
         //backButtonを押すとアクティビティ終了
@@ -39,8 +41,13 @@ class DailyEventListActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        //Todo: 日付が一致するレコードを検索
+        //日付が一致するレコードを検索
         val realmResults = realm.where<Event>()
+            .equalTo("year", year)
+            .and()
+            .equalTo("month", month)
+            .and()
+            .equalTo("date", day)
             .findAll()
 
         //recyclerViewを表示
