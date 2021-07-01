@@ -39,6 +39,9 @@ class DailyEventListActivity : AppCompatActivity() {
         //floatingButtonを押すと、新規イベント作成のためにEditEventActivityへ遷移する
         floatingButton.setOnClickListener {
             val intent = Intent(this, EditEventActivity::class.java)
+            intent.putExtra("currentYear", year)
+            intent.putExtra("currentMonth", month)
+            intent.putExtra("currentDay", day)
             startActivity(intent)
         }
 
