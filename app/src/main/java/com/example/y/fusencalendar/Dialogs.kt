@@ -1,9 +1,11 @@
 package com.example.y.fusencalendar
 
+import android.app.DatePickerDialog
 import android.app.Dialog
 import android.app.TimePickerDialog
 import android.content.Context
 import android.os.Bundle
+import android.widget.DatePicker
 import android.widget.TimePicker
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -20,12 +22,12 @@ import java.util.*
 * */
 
 
-//DialogFagmentを継承する２つボタン選択のダイアログ確認を行うダイアログ全般
+//DialogFragmentを継承する２つボタン選択のダイアログ確認を行うダイアログ全般
 class ConfirmDialog(private val message:String,          //ダイアログのタイトル
                     private val okLable:String,          //OKボタンのラベル
                     private val okSelected:() -> Unit,   //OKボタンがタップされたときに実行する関数
-                    private val cancelLable:String,      //Cancellボタンのラベル
-                    private val cancellSelected : () -> Unit     //Cancellボタンがタップされたときに実行する関数
+                    private val cancelLable:String,      //Cancelボタンのラベル
+                    private val cancelSelected : () -> Unit     //Cancelボタンがタップされたときに実行する関数
                     ):DialogFragment(){
 
     //onCreateDialogをオーバーライドしたダイアログを作成する関数
@@ -47,41 +49,127 @@ class ConfirmDialog(private val message:String,          //ダイアログのタ
         //ダイアログに表示する２番めのボタン
         builder.setNegativeButton(cancelLable){
 
-            dialog, which ->  cancellSelected()
+            dialog, which ->  cancelSelected()
         }
         //builderのcreate()メソッドを返しAlertDialogオブジェクトを返す
         return builder.create()
     }
 
-
 }
+
+
+//DatePicker
+class DatePickerDialogFragment: DialogFragment(), DatePickerDialog.OnDateSetListener {
+
+    //呼び出し元のActivityに値を渡すリスナー
+    interface OnSelectedDateListener {
+        fun selectedDate(year: Int, month: Int, date: Int)
+    }
+
+    private lateinit var listener: OnSelectedDateListener
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if(context is OnSelectedDateListener){
+            listener = context
+        }
+    }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val context = context
+        if(context != null) {
+            val calendar = Calendar.getInstance()
+            calendar.timeInMillis = Date().time
+            calendar.timeInMillis = Date().time
+            val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH)
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
+            val datePickerDialog = DatePickerDialog(context, this, year, month, day)
+            return datePickerDialog
+        }else{
+            return super.onCreateDialog(savedInstanceState)
+        }
+    }
+
+    //DatePickerDialogから選択結果を受け取る
+    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+        listener.selectedDate(year, month, dayOfMonth)
+    }
+}
+
+
+//TimePicker
+class TimePickerDialogFragment: DialogFragment(), TimePickerDialog.OnTimeSetListener {
+
+    //呼び出し元のActivityに値を渡すリスナー
+    interface OnSelectedTimeListener {
+        fun selectedTime(hour: Int, minute: Int)
+    }
+
+    private lateinit var listener: OnSelectedTimeListener
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if(context is OnSelectedTimeListener){
+            listener = context
+        }
+    }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val calendar = Calendar.getInstance()
+        calendar.timeInMillis = Date().time
+        val context = context
+        return when {
+            context != null -> {
+                TimePickerDialog(
+                    context,
+//                    R.style.CustomTimePickerDialog,
+                    this,
+                    calendar.get(Calendar.HOUR_OF_DAY),
+                    calendar.get(Calendar.MINUTE),
+                    true
+                )
+            }
+            else -> super.onCreateDialog(savedInstanceState)
+        }
+    }
+
+    //TimePickerDialogから選択結果を受け取る
+    override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
+        listener.selectedTime(hourOfDay, minute)
+    }
+}
+
+
 
 //時刻選択を提供するダイアログ
-class TimeDialog(private val onSelected:(String) -> Unit):DialogFragment(),TimePickerDialog.OnTimeSetListener{
+//class TimeDialog(private val onSelected:(String) -> Unit):DialogFragment(),TimePickerDialog.OnTimeSetListener{
+//
+//    //ダイアログを作成する関数
+//    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+//        //カレンダークラスのインスタンスを取得
+//        val c = Calendar.getInstance()
+//        //現在の時刻を初期値として取得
+//        val hour = c.get(Calendar.HOUR_OF_DAY)
+//        val minute = c.get(Calendar.MINUTE)
+//        //インスタンスを生成し返す
+//        /*
+//        * 第1引数：ダイアログを表示する対象のコンテキスト
+//        * 第2引数：日付がセットされたときに呼ばれるリスナー
+//        * 第3引数、第4引数：初期設定される時刻
+//        * 第5引数：24時間表示(true)かAM/PM表記(false)
+//        * */
+//        return TimePickerDialog(context,this,hour,minute,true)
+//    }
+//
+//    override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
+//        onSelected("%1$2d:%2$2d".format(hourOfDay,minute))
+//    }
+//}
 
-    //ダイアログを作成する関数
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        //カレンダークラスのインスタンスを取得
-        val c = Calendar.getInstance()
-        //現在の時刻を初期値として取得
-        val hour = c.get(Calendar.HOUR_OF_DAY)
-        val minute = c.get(Calendar.MINUTE)
-        //インスタンスを生成し返す
-        /*
-        * 第1引数：ダイアログを表示する対象のコンテキスト
-        * 第2引数：日付がセットされたときに呼ばれるリスナー
-        * 第3引数、第4引数：初期設定される時刻
-        * 第5引数：24時間表示(true)かAM/PM表記(false)
-        * */
-        return TimePickerDialog(context,this,hour,minute,true)
-    }
-
-    override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
-        onSelected("%1$2d:%2$2d".format(hourOfDay,minute))
-    }
-}
 
 
+//色を選択するダイアログ
 class ColorDialogFragment: DialogFragment(){
 
     //EditActivityへcolorIdを渡すためのインターフェース
