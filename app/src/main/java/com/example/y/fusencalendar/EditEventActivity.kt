@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.activity_edit_event.*
 
 class EditEventActivity : AppCompatActivity() {
     private lateinit var realm: Realm
+    private var eventId = 0
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,12 +22,11 @@ class EditEventActivity : AppCompatActivity() {
         setContentView(R.layout.activity_edit_event)
 
         realm = Realm.getDefaultInstance()
-
-        val eventId = intent.getIntExtra("eventId", 0)
-
+        eventId = intent.getIntExtra("eventId", 0)
         if(eventId > 0){
             val event = realm.where<Event>()
                 .equalTo("id",eventId).findFirst()
+
             titleEdit.setText(event?.title.toString())
             memoEdit.setText(event?.memo.toString())
             Toast.makeText(applicationContext, "色は${event?.colorId.toString()}番です。", Toast.LENGTH_SHORT).show()
@@ -38,23 +38,46 @@ class EditEventActivity : AppCompatActivity() {
         }
 
         backButton.setOnClickListener{ v: View? ->
-            var title: String = "タイトル"
-            var memo: String = "メモ"
-            var colorId: Int = 0
-            var year: Int = 0
-            var month: Int = 0
-            var date: Int = 0
-            var hour: Int = 0
-            var minute: Int = 0
-
-            if(!titleEdit.text.isNullOrEmpty()){
-                title = titleEdit.text.toString()
+            save()
+        }
+        deleteButton.setOnClickListener(){
+            realm.executeTransaction{
+                val event = realm.where<Event>()
+                    .equalTo("id",eventId)
+                    ?.findFirst()
+                    ?.deleteFromRealm()
             }
-            if(!memoEdit.text.isNullOrEmpty()){
-                memo = memoEdit.text.toString()
-            }
+            Toast.makeText(applicationContext, "削除しました", Toast.LENGTH_SHORT).show()
+            finish()
+        }
+    }
 
-            when(eventId){
+    override fun onBackPressed() {
+        super.onBackPressed()
+        save()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        realm.close()
+    }
+
+    fun save(){
+        var title: String = ""
+        var memo: String = ""
+        var colorId: Int = 0
+        var year: Int = 0
+        var month: Int = 0
+        var date: Int = 0
+        var hour: Int = 0
+        var minute: Int = 0
+
+        if(titleEdit.text.isNotEmpty() || memoEdit.text.isNotEmpty()) {
+
+            title = titleEdit.text.toString()
+            memo = memoEdit.text.toString()
+
+            when (eventId) {
                 0 -> {
                     realm.executeTransaction {
                         val maxId = realm.where<Event>().max("id")
@@ -73,7 +96,7 @@ class EditEventActivity : AppCompatActivity() {
                 else -> {
                     realm.executeTransaction {
                         val Event = realm.where<Event>()
-                            .equalTo("id",eventId).findFirst()
+                            .equalTo("id", eventId).findFirst()
                         Event?.title = title
                         Event?.memo = memo
                         Event?.colorId = colorId
@@ -86,22 +109,7 @@ class EditEventActivity : AppCompatActivity() {
                 }
             }
             Toast.makeText(applicationContext, "保存しました", Toast.LENGTH_SHORT).show()
-            finish()
         }
-        deleteButton.setOnClickListener(){
-            realm.executeTransaction{
-                val event = realm.where<Event>()
-                    .equalTo("id",eventId)
-                    ?.findFirst()
-                    ?.deleteFromRealm()
-            }
-            Toast.makeText(applicationContext, "削除しました", Toast.LENGTH_SHORT).show()
-            finish()
-        }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        realm.close()
+        finish()
     }
 }
