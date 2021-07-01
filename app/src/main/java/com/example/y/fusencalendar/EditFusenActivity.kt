@@ -32,6 +32,12 @@ class EditFusenActivity : AppCompatActivity(), ColorDialogFragment.DialogListene
                 .equalTo("id",fusenId).findFirst()
             titleEdit.setText(fusen?.title.toString())
             memoEdit.setText(fusen?.memo.toString())
+            title = fusen?.title!!
+            memo = fusen.memo
+            colorId = fusen.colorId
+
+
+
             deleteButton.visibility = View.VISIBLE
         } else{
             deleteButton.visibility = View.INVISIBLE

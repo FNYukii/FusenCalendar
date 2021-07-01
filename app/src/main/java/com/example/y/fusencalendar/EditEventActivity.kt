@@ -51,6 +51,9 @@ class EditEventActivity :
             date = event.date
             hour = event.hour
             minute = event.minute
+            colorId = event.colorId
+            title = event.title
+            memo = event.memo
 
 
             deleteButton.visibility = View.VISIBLE
@@ -151,11 +154,10 @@ class EditEventActivity :
     }
 
     override fun selectedDate(year: Int, month: Int, date: Int) {
-        Log.d("hello", "year: $year month: $month date: $date")
         this.year = year
-        this.month = month
+        this.month = month + 1
         this.date = date
-        val dateString = year.toString() + "年" + month.toString() + "月" + date.toString() + "日"
+        val dateString = this.year.toString() + "年" + this.month.toString() + "月" + this.date.toString() + "日"
         dateText.text = dateString
     }
 
