@@ -47,6 +47,12 @@ class CalendarPageFragment : Fragment() {
     }
 
 
+    override fun onStart() {
+        super.onStart()
+        calendarRecyclerView.adapter = CalendarRecyclerViewAdapter(days)
+    }
+
+
     private fun Date.offset(month: Int = 0) {
         time = Calendar.getInstance().apply {
             add(Calendar.MONTH, month)

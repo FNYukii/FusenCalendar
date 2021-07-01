@@ -46,29 +46,35 @@ class EventRecyclerViewAdapter(
         val event = collection[position]
 
         //タイトルとメモの文字列をセット
-        holder.itemView.eventTitleText.text = event?.title.toString()
-        holder.itemView.eventMemoText.text = event?.memo.toString()
+        holder.eventTitleText.text = event?.title.toString()
+        holder.eventMemoText.text = event?.memo.toString()
+
+        //時刻の文字列をセット
+        val hourString = event?.hour.toString().padStart(2, '0')
+        val minuteString = event?.minute.toString().padStart(2, '0')
+        val timeString = "$hourString:$minuteString"
+        holder.eventDateText.text = timeString
 
         //colorIdに応じて、カードの色を設定
         when(event.colorId){
             0 -> {
-                holder.eventBackground.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.green))
+                holder.eventBackground.setBackgroundResource(R.drawable.background_card_green)
             }
             1 -> {
-                holder.eventBackground.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.blue))
+                holder.eventBackground.setBackgroundResource(R.drawable.background_card_blue)
             }
             2 -> {
-                holder.eventBackground.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.orange))
+                holder.eventBackground.setBackgroundResource(R.drawable.background_card_orange)
             }
             3 -> {
-                holder.eventBackground.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.red))
+                holder.eventBackground.setBackgroundResource(R.drawable.background_card_red)
             }
             4 -> {
-                holder.eventBackground.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.purple))
+                holder.eventBackground.setBackgroundResource(R.drawable.background_card_purple)
             }
         }
 
-
+        //クリックされたら編集画面へ遷移
         holder.itemView.setOnClickListener {
             val intent = Intent(it.context, EditEventActivity::class.java)
             intent.putExtra("eventId", event.id)
