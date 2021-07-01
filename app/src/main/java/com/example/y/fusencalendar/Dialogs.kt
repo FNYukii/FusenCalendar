@@ -77,3 +77,35 @@ class TimeDialog(private val onSelected:(String) -> Unit):DialogFragment(),TimeP
         onSelected("%1$2d:%2$2d".format(hourOfDay,minute))
     }
 }
+
+class ColorSelectDialog(private val message:String,          //ダイアログのタイトル
+                        private val okLable:String,          //OKボタンのラベル
+                        private val okSelected:() -> Unit,   //OKボタンがタップされたときに実行する関数
+                        private val cancelLable:String,      //Cancellボタンのラベル
+                        private val cancellSelected : () -> Unit):DialogFragment(){
+
+    override fun onCreateDialog(savedInstanceState: Bundle?):Dialog {
+
+        //AlertDialog.Builderのインスタンスを生成(引数はダイアログを生成するアクティビティ)
+        //requireActivity()はフラグメントを呼び出したアクティビティを返す
+        val builder = AlertDialog.Builder(requireActivity())
+        //表示するメッセージを設定
+        builder.setMessage(message)
+        //ダイアログに表示する１番目のボタン
+        builder.setPositiveButton(okLable) {
+            //onClickメソッドをSAM変換でラムダ式として記述
+            //dialogタップが発生したダイアログ
+            //whichタップが発生したボタンの種類
+                dialog, which ->
+            okSelected()
+        }
+        //ダイアログに表示する２番めのボタン
+        builder.setNegativeButton(cancelLable) {
+
+                dialog, which ->
+            cancellSelected()
+        }
+        //builderのcreate()メソッドを返しAlertDialogオブジェクトを返す
+        return builder.create()
+    }
+}

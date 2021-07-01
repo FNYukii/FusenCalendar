@@ -24,9 +24,16 @@ class SettingFragment : Fragment() {
 
         val slideText :ViewGroup = view.findViewById(R.id.linearLayout3)
         val alarmText : ViewGroup = view.findViewById(R.id.linearLayout)
+        val helpText : ViewGroup = view.findViewById(R.id.linearLayout4)
         tap(slideText)
         tap(alarmText)
 
+        helpText.setOnClickListener {
+            val dialog = ConfirmDialog("キャンセルしますか？","キャンセル",{
+
+            },"戻る",{})
+            dialog.show(parentFragmentManager,"colorselectdialog")
+        }
     }
 
 
@@ -39,6 +46,4 @@ class SettingFragment : Fragment() {
             dialog.show(parentFragmentManager,"cancell_dialog")
         }
     }
-
-
 }
