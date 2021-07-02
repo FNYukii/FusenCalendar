@@ -10,7 +10,6 @@ import io.realm.Realm
 import io.realm.kotlin.createObject
 import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.activity_edit_fusen.*
-import java.util.*
 
 class EditFusenActivity : AppCompatActivity(), ColorDialogFragment.DialogListener {
     private lateinit var realm: Realm
@@ -58,6 +57,13 @@ class EditFusenActivity : AppCompatActivity(), ColorDialogFragment.DialogListene
             }
             Toast.makeText(applicationContext, "削除しました", Toast.LENGTH_SHORT).show()
             finish()
+        }
+
+        //eventButtonを押すと、ふせんをカレンダーに貼るために日時を選択するActivityへ遷移する
+        eventButton.setOnClickListener {
+            val intent = Intent(this, PasteFusenToCalendarActivity::class.java)
+            intent.putExtra("fusenId", fusenId)
+            startActivity(intent)
         }
 
         colorButton02.setOnClickListener{ v: View? ->
