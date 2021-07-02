@@ -9,6 +9,9 @@ import androidx.fragment.app.FragmentActivity
 import androidx.preference.PreferenceManager
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import io.realm.Realm
+import io.realm.kotlin.createObject
+import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.activity_paste_fusen_to_calendar.*
 import java.time.LocalDate
 
@@ -21,6 +24,12 @@ class PasteFusenToCalendarActivity :
 
     //calendarPagerのページ数
     private val pageSize = Int.MAX_VALUE //約20億
+
+    //イベントとして登録したいふせんの内容
+    private var fusenId = 0
+    private var title = ""
+    private var memo = ""
+    private var colorId = 0
 
     //ふせんをイベントとして登録する日時
     private var selectedYear = 0
@@ -35,6 +44,16 @@ class PasteFusenToCalendarActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_paste_fusen_to_calendar)
+
+        //貼りたいふせんの内容を取得する
+        fusenId = intent.getIntExtra("fusenId", 0)
+        val realm = Realm.getDefaultInstance()
+        val realmResult = realm.where<Fusen>()
+            .equalTo("id", fusenId)
+            .findFirst()
+        title = realmResult?.title!!
+        memo = realmResult.memo
+        colorId = realmResult.colorId
 
         //calendarPager02の処理
         calendarPager02.adapter = CustomPagerAdapter(this)
@@ -85,7 +104,24 @@ class PasteFusenToCalendarActivity :
         selectedHour = hour
         selectedMinute = minute
 
-        Log.d("hello", "selected $selectedYear-$selectedMonth-$selectedDay $selectedHour:$selectedMinute")
+        //選択された日時に、ふせんをイベントとして登録する
+        val realm = Realm.getDefaultInstance()
+        realm.executeTransaction {
+            val maxId = realm.where<Event>().max("id")
+            val nextId = (maxId?.toInt() ?: 0) + 1
+            val event = realm.createObject<Event>(nextId)
+            event.title = title
+            event.memo = memo
+            event.colorId = colorId
+            event.year = selectedYear
+            event.month = selectedMonth
+            event.date = selectedDay
+            event.hour = selectedHour
+            event.minute = selectedMinute
+        }
+
+        finish()
+
     }
 
 
