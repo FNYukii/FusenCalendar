@@ -58,10 +58,10 @@ class EventRecyclerViewAdapter(
         //colorIdに応じて、カードの色を設定
         when(event.colorId){
             0 -> {
-                holder.eventBackground.setBackgroundResource(R.drawable.background_card_green)
+                holder.eventBackground.setBackgroundResource(R.drawable.background_card_blue)
             }
             1 -> {
-                holder.eventBackground.setBackgroundResource(R.drawable.background_card_blue)
+                holder.eventBackground.setBackgroundResource(R.drawable.background_card_green)
             }
             2 -> {
                 holder.eventBackground.setBackgroundResource(R.drawable.background_card_orange)

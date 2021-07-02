@@ -179,7 +179,7 @@ class ColorDialogFragment: DialogFragment(){
     private var listener:DialogListener? = null
 
     //配列や変数を宣言
-    private val colors = arrayOf("緑", "青", "オレンジ", "赤", "紫")
+    private val colors = arrayOf("青", "緑", "オレンジ", "赤", "紫")
     private var colorId: Int = -1
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

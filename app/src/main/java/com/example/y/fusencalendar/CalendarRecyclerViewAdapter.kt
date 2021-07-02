@@ -96,10 +96,10 @@ class CalendarRecyclerViewAdapter(
         if(realmResults.size >= 1){
             when(realmResults[0]?.colorId){
                 0 -> {
-                    holder.cardImage01.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.green))
+                    holder.cardImage01.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.blue))
                 }
                 1 -> {
-                    holder.cardImage01.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.blue))
+                    holder.cardImage01.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.green))
                 }
                 2 -> {
                     holder.cardImage01.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.orange))
@@ -117,10 +117,10 @@ class CalendarRecyclerViewAdapter(
         if(realmResults.size >= 2){
             when(realmResults[1]?.colorId){
                 0 -> {
-                    holder.cardImage02.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.green))
+                    holder.cardImage02.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.blue))
                 }
                 1 -> {
-                    holder.cardImage02.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.blue))
+                    holder.cardImage02.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.green))
                 }
                 2 -> {
                     holder.cardImage02.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.orange))
@@ -138,10 +138,10 @@ class CalendarRecyclerViewAdapter(
         if(realmResults.size >= 3){
             when(realmResults[2]?.colorId){
                 0 -> {
-                    holder.cardImage03.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.green))
+                    holder.cardImage03.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.blue))
                 }
                 1 -> {
-                    holder.cardImage03.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.blue))
+                    holder.cardImage03.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.green))
                 }
                 2 -> {
                     holder.cardImage03.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.orange))
@@ -159,10 +159,10 @@ class CalendarRecyclerViewAdapter(
         if(realmResults.size >= 4){
             when(realmResults[3]?.colorId){
                 0 -> {
-                    holder.cardImage04.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.green))
+                    holder.cardImage04.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.blue))
                 }
                 1 -> {
-                    holder.cardImage04.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.blue))
+                    holder.cardImage04.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.green))
                 }
                 2 -> {
                     holder.cardImage04.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.orange))
@@ -197,15 +197,6 @@ class CalendarRecyclerViewAdapter(
             //ホストがPasteFusenToCalendarActivityなら、
             if(days[position] != null && isPasteFusen){
 
-                //SharedPreferencesのオブジェクトを取得
-                /*val sharedPref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(it.context)
-
-                //選択された年月日をSharedPreferencesへ保存
-                sharedPref.edit().putInt("selectedYear", year).apply()
-                sharedPref.edit().putInt("selectedMonth", month).apply()
-                sharedPref.edit().putInt("selectedDay", day).apply()
-//                val frag = sharedPref.getBoolean("frag", false)
-//                sharedPref.edit().putBoolean("frag", !frag).apply()*/
                 days[position]?.let { date ->
                     onCalendarCellSelectedListener?.invoke(holder.itemView, position, date)
                 }
