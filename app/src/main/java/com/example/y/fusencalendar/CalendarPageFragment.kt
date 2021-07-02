@@ -14,7 +14,14 @@ import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.*
 
+
+interface ShowDateTimePickerListener {
+    fun showDatePicker(date: LocalDate)
+}
+
 class CalendarPageFragment : Fragment() {
+
+
 
 
     //ページ数

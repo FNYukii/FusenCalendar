@@ -12,25 +12,29 @@ import androidx.viewpager2.widget.ViewPager2
 import kotlinx.android.synthetic.main.activity_paste_fusen_to_calendar.*
 import java.time.LocalDate
 
-interface ShowDateTimePickerListener {
-    fun showDatePicker(date: LocalDate)
-}
-class PasteFusenToCalendarActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener, ShowDateTimePickerListener {
+
+
+class PasteFusenToCalendarActivity :
+    AppCompatActivity(),
+    ShowDateTimePickerListener,
+    TimePickerDialogFragment.OnSelectedTimeListener {
 
     //calendarPagerのページ数
     private val pageSize = Int.MAX_VALUE //約20億
 
-    //SharedPreferencesオブジェクト用の変数を宣言
-    private lateinit var sharedPref: SharedPreferences
+    //ふせんをイベントとして登録する日時
+    private var selectedYear = 0
+    private var selectedMonth = 0
+    private var selectedDay = 0
+    private var selectedHour = 0
+    private var selectedMinute = 0
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_paste_fusen_to_calendar)
-
-        //SharedPreferencesのオブジェクト取得&changeListenerをセット
-        sharedPref = PreferenceManager.getDefaultSharedPreferences(applicationContext)
-        //sharedPref.registerOnSharedPreferenceChangeListener(this)
 
         //calendarPager02の処理
         calendarPager02.adapter = CustomPagerAdapter(this)
@@ -60,33 +64,28 @@ class PasteFusenToCalendarActivity : AppCompatActivity(), SharedPreferences.OnSh
     }
 
 
-    //SharedPreferencesの値が更新されたら、
-    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-            val selectedYear = sharedPref.getInt("selectedYear", 0)
-            val selectedMonth = sharedPref.getInt("selectedMonth", 0)
-            val selectedDay = sharedPref.getInt("selectedDay", 0)
-//            val frag = sharedPref.getBoolean("frag", false)
-            Log.d("hello", "$selectedYear-$selectedMonth-$selectedDay")
-
-       //
-
-    }
 
     override fun showDatePicker(date: LocalDate) {
+
+        //選択された日付を取得
+        selectedYear = date.year
+        selectedMonth = date.monthValue
+        selectedDay = date.dayOfMonth
+
+        //timePickerを表示
         val timePickerDialogFragment = TimePickerDialogFragment()
         timePickerDialogFragment.show(supportFragmentManager, "dialog")
-
     }
 
-    override fun onResume() {
-        super.onResume()
-        sharedPref.registerOnSharedPreferenceChangeListener(this)
-    }
 
-    override fun onPause() {
-        super.onPause()
+    //timePickerで時刻が選択されたら…
+    override fun selectedTime(hour: Int, minute: Int) {
 
-        sharedPref.unregisterOnSharedPreferenceChangeListener(this)
+        //選択された時刻を取得
+        selectedHour = hour
+        selectedMinute = minute
+
+        Log.d("hello", "selected $selectedYear-$selectedMonth-$selectedDay $selectedHour:$selectedMinute")
     }
 
 
