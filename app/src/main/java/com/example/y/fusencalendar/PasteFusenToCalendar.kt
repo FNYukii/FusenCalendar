@@ -26,6 +26,13 @@ class PasteFusenToCalendar : AppCompatActivity() {
         calendarPager02.setCurrentItem(pageSize / 2,false)
         //calendarPagerのスクロール方向を指定
         calendarPager02.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+
+        //backButton03を押すとfinish()
+        backButton03.setOnClickListener {
+            finish()
+        }
+
+
     }
 
     private inner class CustomPagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
