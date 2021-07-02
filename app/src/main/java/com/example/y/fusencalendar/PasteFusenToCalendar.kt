@@ -1,7 +1,10 @@
 package com.example.y.fusencalendar
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -16,6 +19,7 @@ class PasteFusenToCalendar : AppCompatActivity() {
 
 
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_paste_fusen_to_calendar)
@@ -31,6 +35,8 @@ class PasteFusenToCalendar : AppCompatActivity() {
         backButton03.setOnClickListener {
             finish()
         }
+
+        //Todo: calendarPager02にOnTouchListenerを実装する
 
 
     }

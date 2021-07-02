@@ -1,6 +1,7 @@
 package com.example.y.fusencalendar
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
 import io.realm.Realm
 import io.realm.Sort
@@ -169,8 +171,10 @@ class CalendarRecyclerViewAdapter(
         }
 
 
-        //日付がnull以外のセルをタップすると、DailyEventListActivityへ遷移。
+        //日付がnull以外のセルをタップすると…
         holder.itemView.setOnClickListener {
+
+            //ホストがCalendarFragmentならDailyEventListActivityへ遷移。
             if(days[position] != null && !isPasteFusen){
                 val intent = Intent(it.context, DailyEventListActivity::class.java)
 
@@ -182,6 +186,21 @@ class CalendarRecyclerViewAdapter(
                 //intent実行
                 it.context.startActivity(intent)
             }
+
+
+            //ホストがPasteFusenToCalendarActivityなら、
+            if(days[position] != null && isPasteFusen){
+
+                //SharedPreferencesのオブジェクトを取得
+                val sharedPref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(it.context)
+
+                //選択された年月日をSharedPreferencesへ保存
+                sharedPref.edit().putInt("selectedYear", year).apply()
+                sharedPref.edit().putInt("selectedMonth", month).apply()
+                sharedPref.edit().putInt("selectedDay", day).apply()
+            }
+
+
         }
 
     }
