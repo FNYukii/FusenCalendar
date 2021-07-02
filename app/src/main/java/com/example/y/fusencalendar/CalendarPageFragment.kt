@@ -26,6 +26,8 @@ class CalendarPageFragment : Fragment() {
     //CalendarRecyclerViewのセルの高さ
     private var cellheight: Int = 100
 
+    private var isPasteFusen: Boolean = false
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,13 +46,16 @@ class CalendarPageFragment : Fragment() {
         //SharedPreferencesに保存していたcellの高さを取得
         cellheight = sharedPref.getInt("cellHeight", 0)
 
-        //HistoryFragmentからページ番号を受け取って、当月との差を計算
+        //ホストFragmentもしくはホストActivityからページ番号を受け取って、当月との差を計算
         val position = arguments?.getInt("position") ?: 0
         val offsetMonth: Int = 0 - (pageSize / 2 - position)
 
+        //ホストFragmentもしくはホストActivityからisPasteFusenの真偽を受け取る
+        isPasteFusen = arguments?.getBoolean("isPasteFusen")!!
+
         //一ヵ月分の日付情報をDayRecyclerViewAdapterへ渡して、それをcalendarRecyclerViewのAdapterとする
         days = createDays(offsetMonth)
-        calendarRecyclerView.adapter = CalendarRecyclerViewAdapter(days, cellheight)
+        calendarRecyclerView.adapter = CalendarRecyclerViewAdapter(days, cellheight, isPasteFusen)
         calendarRecyclerView.layoutManager = GridLayoutManager(this.context, 7)
 
         //labelTextに年月のテキストをセット
@@ -60,7 +65,7 @@ class CalendarPageFragment : Fragment() {
         calendarRecyclerView.afterMeasured {
             if(calendarRecyclerView != null){
                 cellheight = calendarRecyclerView.height / 6
-                calendarRecyclerView.adapter = CalendarRecyclerViewAdapter(days, cellheight)
+                calendarRecyclerView.adapter = CalendarRecyclerViewAdapter(days, cellheight, isPasteFusen)
             }
             //セルの高さをSharedPreferencesに保存
             sharedPref.edit().putInt("cellHeight", cellheight).apply()
@@ -71,7 +76,7 @@ class CalendarPageFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        calendarRecyclerView.adapter = CalendarRecyclerViewAdapter(days, cellheight)
+        calendarRecyclerView.adapter = CalendarRecyclerViewAdapter(days, cellheight, isPasteFusen)
     }
 
 

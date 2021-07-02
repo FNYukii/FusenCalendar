@@ -43,6 +43,7 @@ class PasteFusenToCalendar : AppCompatActivity() {
             val fragment = CalendarPageFragment()
             val bundle = Bundle()
             bundle.putInt("position", position)
+            bundle.putBoolean("isPasteFusen", true)
             fragment.arguments = bundle
             return fragment
         }

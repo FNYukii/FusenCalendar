@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import io.realm.Realm
 import io.realm.Sort
+import io.realm.annotations.PrimaryKey
 import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.one_calendar_cell.view.*
 import java.time.LocalDate
@@ -19,7 +20,8 @@ import java.time.format.DateTimeFormatter
 
 class CalendarRecyclerViewAdapter(
     private val days: Array<LocalDate?>,
-    private val cellHeight: Int
+    private val cellHeight: Int,
+    private val isPasteFusen: Boolean
 ): RecyclerView.Adapter<CalendarRecyclerViewAdapter.CustomViewHolder>() {
 
 
@@ -167,13 +169,9 @@ class CalendarRecyclerViewAdapter(
         }
 
 
-
-
-
-
         //日付がnull以外のセルをタップすると、DailyEventListActivityへ遷移。
         holder.itemView.setOnClickListener {
-            if(days[position] != null){
+            if(days[position] != null && !isPasteFusen){
                 val intent = Intent(it.context, DailyEventListActivity::class.java)
 
                 //日付情報をintentに付与
