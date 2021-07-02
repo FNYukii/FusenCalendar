@@ -3,6 +3,7 @@ package com.example.y.fusencalendar
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -198,6 +199,7 @@ class CalendarRecyclerViewAdapter(
                 sharedPref.edit().putInt("selectedYear", year).apply()
                 sharedPref.edit().putInt("selectedMonth", month).apply()
                 sharedPref.edit().putInt("selectedDay", day).apply()
+                Log.d("hello", "selected year: $year month: $month day: $day")
             }
 
 
