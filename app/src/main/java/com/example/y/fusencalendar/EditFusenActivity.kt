@@ -10,7 +10,6 @@ import io.realm.Realm
 import io.realm.kotlin.createObject
 import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.activity_edit_fusen.*
-import java.util.*
 
 class EditFusenActivity : AppCompatActivity(), ColorDialogFragment.DialogListener {
     private lateinit var realm: Realm
@@ -62,7 +61,7 @@ class EditFusenActivity : AppCompatActivity(), ColorDialogFragment.DialogListene
 
         //eventButtonを押すと、ふせんをカレンダーに貼るために日時を選択するActivityへ遷移する
         eventButton.setOnClickListener {
-            val intent = Intent(this, PasteFusenToCalendar::class.java)
+            val intent = Intent(this, PasteFusenToCalendarActivity::class.java)
             startActivity(intent)
         }
 

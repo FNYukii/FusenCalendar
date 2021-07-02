@@ -1,5 +1,6 @@
 package com.example.y.fusencalendar
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
@@ -21,10 +22,13 @@ import kotlinx.android.synthetic.main.one_calendar_cell.view.*
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
+
+
 class CalendarRecyclerViewAdapter(
     private val days: Array<LocalDate?>,
     private val cellHeight: Int,
-    private val isPasteFusen: Boolean
+    private val isPasteFusen: Boolean,
+    var onCalendarCellSelectedListener: ((view: View, position: Int, date: LocalDate)->Unit)? = null
 ): RecyclerView.Adapter<CalendarRecyclerViewAdapter.CustomViewHolder>() {
 
 
@@ -50,6 +54,7 @@ class CalendarRecyclerViewAdapter(
     }
 
 
+    @SuppressLint("CommitPrefEdits")
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
 
         //変数を用意
@@ -193,13 +198,18 @@ class CalendarRecyclerViewAdapter(
             if(days[position] != null && isPasteFusen){
 
                 //SharedPreferencesのオブジェクトを取得
-                val sharedPref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(it.context)
+                /*val sharedPref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(it.context)
 
                 //選択された年月日をSharedPreferencesへ保存
                 sharedPref.edit().putInt("selectedYear", year).apply()
                 sharedPref.edit().putInt("selectedMonth", month).apply()
                 sharedPref.edit().putInt("selectedDay", day).apply()
-                Log.d("hello", "selected year: $year month: $month day: $day")
+//                val frag = sharedPref.getBoolean("frag", false)
+//                sharedPref.edit().putBoolean("frag", !frag).apply()*/
+                days[position]?.let { date ->
+                    onCalendarCellSelectedListener?.invoke(holder.itemView, position, date)
+                }
+
             }
 
 

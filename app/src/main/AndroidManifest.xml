@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FusenCalendar">
-        <activity android:name=".PasteFusenToCalendar"></activity>
+        <activity android:name=".PasteFusenToCalendarActivity"></activity>
         <activity android:name=".EditEventActivity" />
         <activity android:name=".EditFusenActivity" />
         <activity android:name=".DailyEventListActivity" />

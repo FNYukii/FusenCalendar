@@ -29,6 +29,10 @@ class CalendarPageFragment : Fragment() {
     private var isPasteFusen: Boolean = false
 
 
+    private val onDateTimeSelectedListener: (View, Int, LocalDate)->Unit = { _, _, date ->
+        (requireActivity() as? ShowDateTimePickerListener)?.showDatePicker(date)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,7 +59,7 @@ class CalendarPageFragment : Fragment() {
 
         //一ヵ月分の日付情報をDayRecyclerViewAdapterへ渡して、それをcalendarRecyclerViewのAdapterとする
         days = createDays(offsetMonth)
-        calendarRecyclerView.adapter = CalendarRecyclerViewAdapter(days, cellheight, isPasteFusen)
+        calendarRecyclerView.adapter = CalendarRecyclerViewAdapter(days, cellheight, isPasteFusen, onDateTimeSelectedListener)
         calendarRecyclerView.layoutManager = GridLayoutManager(this.context, 7)
 
         //labelTextに年月のテキストをセット
@@ -65,7 +69,7 @@ class CalendarPageFragment : Fragment() {
         calendarRecyclerView.afterMeasured {
             if(calendarRecyclerView != null){
                 cellheight = calendarRecyclerView.height / 6
-                calendarRecyclerView.adapter = CalendarRecyclerViewAdapter(days, cellheight, isPasteFusen)
+                calendarRecyclerView.adapter = CalendarRecyclerViewAdapter(days, cellheight, isPasteFusen, onDateTimeSelectedListener)
             }
             //セルの高さをSharedPreferencesに保存
             sharedPref.edit().putInt("cellHeight", cellheight).apply()
@@ -76,7 +80,7 @@ class CalendarPageFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        calendarRecyclerView.adapter = CalendarRecyclerViewAdapter(days, cellheight, isPasteFusen)
+        calendarRecyclerView.adapter = CalendarRecyclerViewAdapter(days, cellheight, isPasteFusen, onDateTimeSelectedListener)
     }
 
 
