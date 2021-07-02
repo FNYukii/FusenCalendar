@@ -36,9 +36,9 @@
     <color name="purple">#F6C1FF</color>
 
     <!-- 押された時のeventやfusenのカードの色 -->
-    <color name="translucentBlue">#77B6DFFF</color>
+    <color name="translucentBlue">#77C9E8FF</color>
     <color name="translucentGreen">#AAC9FF87</color>
-    <color name="translucentOrange">#77FFDC71</color>
+    <color name="translucentOrange">#77FFCE96</color>
     <color name="translucentRed">#77FFB4AF</color>
     <color name="translucentPurple">#77F6C1FF</color>
 

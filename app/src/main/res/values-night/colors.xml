@@ -18,10 +18,10 @@
     <color name="purple">#4E2853</color>
 
     <!-- 押された時のeventやfusenのカードの色 -->
-    <color name="translucentBlue">#AA53697A</color>
-    <color name="translucentGreen">#AA536A36</color>
-    <color name="translucentOrange">#AA8A773D</color>
-    <color name="translucentRed">#AA7C5957</color>
-    <color name="translucentPurple">#AA785D7C</color>
+    <color name="translucentBlue">#AA385368</color>
+    <color name="translucentGreen">#AA4A6A36</color>
+    <color name="translucentOrange">#AA7A6A37</color>
+    <color name="translucentRed">#AA5E2A2A</color>
+    <color name="translucentPurple">#AA4E2853</color>
 
 </resources>
