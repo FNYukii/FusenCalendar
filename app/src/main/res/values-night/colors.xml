@@ -11,18 +11,18 @@
     <color name="weakText">#DDDDDD</color>
 
     <!-- eventやfusenのカードの色 -->
-    <color name="green">#73934A</color>
-    <color name="blue">#637D91</color>
-    <color name="orange">#A58E48</color>
-    <color name="red">#9A6D6A</color>
-    <color name="purple">#97759C</color>
+    <color name="green">#536A36</color>
+    <color name="blue">#53697A</color>
+    <color name="orange">#8A773D</color>
+    <color name="red">#7C5957</color>
+    <color name="purple">#785D7C</color>
 
     <!-- 押された時のeventやfusenのカードの色 -->
-    <color name="translucentGreen">#AA73934A</color>
-    <color name="translucentBlue">#AA637D91</color>
-    <color name="translucentOrange">#AAA58E48</color>
-    <color name="translucentRed">#AA9A6D6A</color>
-    <color name="translucentPurple">#AA97759C</color>
+    <color name="translucentGreen">#AA536A36</color>
+    <color name="translucentBlue">#AA53697A</color>
+    <color name="translucentOrange">#AA8A773D</color>
+    <color name="translucentRed">#AA7C5957</color>
+    <color name="translucentPurple">#AA785D7C</color>
 
 
 
