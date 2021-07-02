@@ -60,6 +60,12 @@ class EditFusenActivity : AppCompatActivity(), ColorDialogFragment.DialogListene
             finish()
         }
 
+        //eventButtonを押すと、ふせんをカレンダーに貼るために日時を選択するActivityへ遷移する
+        eventButton.setOnClickListener {
+            val intent = Intent(this, PasteFusenToCalendar::class.java)
+            startActivity(intent)
+        }
+
         colorButton02.setOnClickListener{ v: View? ->
             val colorDialog = ColorDialogFragment()
             colorDialog.show(supportFragmentManager, "hello")
