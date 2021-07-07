@@ -45,7 +45,7 @@ class FusenRecyclerViewAdapter(
         holder.fusenTitleText.text = fusen?.title.toString()
         holder.fusenMemoText.text = fusen?.memo.toString()
 
-        //もしタイトルが空なら、eventTitleTextは非表示
+        //もしタイトルが空なら、fusenTitleTextは非表示
         if(fusen?.title.isNullOrEmpty()){
             holder.fusenTitleText.visibility = View.GONE
         }
