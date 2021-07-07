@@ -54,6 +54,11 @@ class EventRecyclerViewAdapter(
         val timeString = "$hourString:$minuteString"
         holder.eventDateText.text = timeString
 
+        //もしタイトルが空なら、eventTitleTextは非表示
+        if(event?.title.isNullOrEmpty()){
+            holder.eventTitleText.visibility = View.GONE
+        }
+
         //colorIdに応じて、カードの色を設定
         when(event.colorId){
             0 -> {
