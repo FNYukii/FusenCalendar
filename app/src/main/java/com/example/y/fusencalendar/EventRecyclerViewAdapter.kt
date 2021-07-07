@@ -6,14 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import io.realm.OrderedRealmCollection
 import io.realm.RealmRecyclerViewAdapter
 import kotlinx.android.synthetic.main.one_event.view.*
-import kotlinx.android.synthetic.main.one_event.view.eventBackground
-import kotlinx.android.synthetic.main.one_event.view.eventMemoText
-import kotlinx.android.synthetic.main.one_event.view.eventTitleText
+import kotlinx.android.synthetic.main.one_event.view.fusenBackground
+import kotlinx.android.synthetic.main.one_event.view.fusenMemoText
+import kotlinx.android.synthetic.main.one_event.view.fusenTitleText
 
 class EventRecyclerViewAdapter(
     private val collection: OrderedRealmCollection<Event>
@@ -21,9 +20,9 @@ class EventRecyclerViewAdapter(
 
 
     class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val eventBackground: ConstraintLayout = itemView.eventBackground
-        val eventTitleText: TextView = itemView.eventTitleText
-        val eventMemoText: TextView = itemView.eventMemoText
+        val eventBackground: ConstraintLayout = itemView.fusenBackground
+        val eventTitleText: TextView = itemView.fusenTitleText
+        val eventMemoText: TextView = itemView.fusenMemoText
         val eventDateText: TextView = itemView.eventDateText
     }
 
