@@ -7,12 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import io.realm.OrderedRealmCollection
-import io.realm.Realm
 import io.realm.RealmRecyclerViewAdapter
-import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.one_fusen.view.*
 
 class FusenRecyclerViewAdapter(
@@ -21,9 +18,9 @@ class FusenRecyclerViewAdapter(
 
 
     class FusenViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val fusenBackground: ConstraintLayout = itemView.eventBackground
-        val fusenTitleText: TextView = itemView.eventTitleText
-        val fusenMemoText: TextView = itemView.eventMemoText
+        val fusenBackground: ConstraintLayout = itemView.fusenBackground
+        val fusenTitleText: TextView = itemView.fusenTitleText
+        val fusenMemoText: TextView = itemView.fusenMemoText
     }
 
 
@@ -45,8 +42,13 @@ class FusenRecyclerViewAdapter(
         val fusen = collection[position]
 
         //タイトルとメモの文字列をセット
-        holder.itemView.eventTitleText.text = fusen?.title.toString()
-        holder.itemView.eventMemoText.text = fusen?.memo.toString()
+        holder.fusenTitleText.text = fusen?.title.toString()
+        holder.fusenMemoText.text = fusen?.memo.toString()
+
+        //もしタイトルが空なら、fusenTitleTextは非表示
+        if(fusen?.title.isNullOrEmpty()){
+            holder.fusenTitleText.visibility = View.GONE
+        }
 
         //colorIdに応じて、カードの色を設定
         when(fusen.colorId){

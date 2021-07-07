@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/eventBackground"
+        android:id="@+id/fusenBackground"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginTop="16dp"
@@ -19,10 +19,11 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/eventTitleText"
+            android:id="@+id/fusenTitleText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="タイトル"
+            android:paddingBottom="8dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/strongText"
             app:layout_constraintEnd_toEndOf="parent"
@@ -30,16 +31,15 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/eventMemoText"
+            android:id="@+id/fusenMemoText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:text="メモ"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/weakText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/eventTitleText" />
+            app:layout_constraintTop_toBottomOf="@+id/fusenTitleText" />
 
         <TextView
             android:id="@+id/eventDateText"
