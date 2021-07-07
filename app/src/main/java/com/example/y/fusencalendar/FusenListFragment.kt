@@ -50,6 +50,13 @@ class FusenListFragment : Fragment() {
         //RecyclerViewを表示
         recyclerView.layoutManager = GridLayoutManager(context, 2)
         recyclerView.adapter = FusenRecyclerViewAdapter(realmResults)
+
+        //もしふせんが一枚も登録されていないなら、画面にメッセージを表示
+        if(realmResults.size == 0){
+            noResultMessageText02.visibility = View.VISIBLE
+        }else{
+            noResultMessageText02.visibility = View.INVISIBLE
+        }
     }
 
 }
