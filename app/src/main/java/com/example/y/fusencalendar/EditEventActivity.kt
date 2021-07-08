@@ -59,10 +59,15 @@ class EditEventActivity :
 
             deleteButton.visibility = View.VISIBLE
         } else{
+            year = intent.getIntExtra("currentYear",0)
+            month = intent.getIntExtra("currentMonth",0)
+            date = intent.getIntExtra("currentDay",0)
             deleteButton.visibility = View.INVISIBLE
         }
 
         colorChange(colorId)
+
+        dateText.setText(year.toString() + "年" + month.toString() + "月" + date.toString() + "日")
 
         backButton.setOnClickListener{ v: View? ->
             save()
