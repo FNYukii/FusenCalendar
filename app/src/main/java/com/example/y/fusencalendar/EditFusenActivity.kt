@@ -5,11 +5,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import io.realm.Realm
 import io.realm.kotlin.createObject
 import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.activity_edit_fusen.*
+import kotlinx.android.synthetic.main.activity_edit_fusen.backButton
+import kotlinx.android.synthetic.main.activity_edit_fusen.deleteButton
+import kotlinx.android.synthetic.main.activity_edit_fusen.memoEdit
+import kotlinx.android.synthetic.main.activity_edit_fusen.titleEdit
 
 class EditFusenActivity : AppCompatActivity(), ColorDialogFragment.DialogListener {
     private lateinit var realm: Realm
@@ -35,12 +40,12 @@ class EditFusenActivity : AppCompatActivity(), ColorDialogFragment.DialogListene
             memo = fusen.memo
             colorId = fusen.colorId
 
-
-
             deleteButton.visibility = View.VISIBLE
         } else{
             deleteButton.visibility = View.INVISIBLE
         }
+
+        colorChange(colorId)
 
         backButton.setOnClickListener{ v: View? ->
             save()
@@ -131,5 +136,31 @@ class EditFusenActivity : AppCompatActivity(), ColorDialogFragment.DialogListene
 
     override fun onDialogColorIdReceive(dialog: DialogFragment, colorId: Int) {
         this.colorId = colorId
+        colorChange(colorId)
+    }
+
+    fun colorChange(colorId: Int){
+        var backGroundColor = ContextCompat.getColor(this, R.color.blue)
+        when(colorId){
+            0 -> {
+                backGroundColor = ContextCompat.getColor(this, R.color.blue)
+            }
+            1 -> {
+                backGroundColor = ContextCompat.getColor(this, R.color.green)
+            }
+            2 -> {
+                backGroundColor = ContextCompat.getColor(this, R.color.orange)
+            }
+            3 -> {
+                backGroundColor = ContextCompat.getColor(this, R.color.red)
+            }
+            4 -> {
+                backGroundColor = ContextCompat.getColor(this, R.color.purple)
+            }
+        }
+        Edit_Fusen_Layout.setBackgroundColor(backGroundColor)
+        toolBar02.setBackgroundColor(backGroundColor)
+        window.statusBarColor = backGroundColor
+        window.navigationBarColor = backGroundColor
     }
 }
