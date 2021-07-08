@@ -1,5 +1,6 @@
 package com.example.y.fusencalendar
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -35,6 +36,17 @@ class CalendarFragment : Fragment() {
         calendarPager.setCurrentItem(pageSize / 2,false)
         //calendarPagerのスクロール方向を指定
         calendarPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+
+        //SharedPreferenceに保存されているカレンダーのスライド方向の設定値を取得
+        val pref = activity?.getSharedPreferences("Setting", Context.MODE_PRIVATE)
+        val slideDirection: Boolean = pref?.getBoolean("SLIDE_DIRECTION", false)!!
+
+        //calendarPagerのスクロール方向を指定
+        if(slideDirection){
+            calendarPager.orientation = ViewPager2.ORIENTATION_VERTICAL
+        }else{
+            calendarPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        }
     }
 
 
