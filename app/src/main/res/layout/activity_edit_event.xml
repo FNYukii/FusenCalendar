@@ -25,7 +25,8 @@
             android:src="@drawable/ic_baseline_arrow_back_ios_new_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/weakText" />
 
         <ImageButton
             android:id="@+id/deleteButton"
@@ -35,7 +36,8 @@
             android:src="@drawable/ic_baseline_delete_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/weakText" />
 
         <ImageButton
             android:id="@+id/colorButton"
@@ -45,7 +47,8 @@
             android:src="@drawable/ic_baseline_palette_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/deleteButton"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/weakText" />
 
         <ImageButton
             android:id="@+id/addFusenButton"
@@ -55,7 +58,8 @@
             android:src="@drawable/ic_baseline_bookmark_add_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/colorButton"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/weakText" />
 
         <View
             android:layout_width="match_parent"
