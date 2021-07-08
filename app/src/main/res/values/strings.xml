@@ -9,6 +9,8 @@
 
     <!-- SettingFragment -->
     <string name="setting_menu_slide">カレンダーのスライドの向き</string>
+    <string name="setting_menu_slide_text">縦方向にスライドする</string>
+    <string name="setting_menu_slide_text_direction">縦方向</string>
     <string name="setting_menu_alarm">イベント通知時間</string>
     <string name="setting_menu_help">使い方ガイド</string>
     <string name="date_Edit">2020/0610/</string>
