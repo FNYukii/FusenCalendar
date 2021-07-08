@@ -25,7 +25,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_baseline_arrow_back_ios_new_24" />
+            app:srcCompat="@drawable/ic_baseline_arrow_back_ios_new_24"
+            app:tint="@color/weakText" />
 
         <ImageButton
             android:id="@+id/eventButton"
@@ -35,7 +36,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/copyButton"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_baseline_event_24" />
+            app:srcCompat="@drawable/ic_baseline_event_24"
+            app:tint="@color/weakText" />
 
         <ImageButton
             android:id="@+id/copyButton"
@@ -45,7 +47,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/colorButton02"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_baseline_content_copy_24" />
+            app:srcCompat="@drawable/ic_baseline_content_copy_24"
+            app:tint="@color/weakText" />
 
         <ImageButton
             android:id="@+id/colorButton02"
@@ -55,7 +58,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/deleteButton"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_baseline_palette_24" />
+            app:srcCompat="@drawable/ic_baseline_palette_24"
+            app:tint="@color/weakText" />
 
         <ImageButton
             android:id="@+id/deleteButton"
@@ -65,15 +69,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_baseline_delete_24" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/headerBorder"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:srcCompat="@drawable/ic_baseline_delete_24"
+            app:tint="@color/weakText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
