@@ -17,15 +17,20 @@ class DailyEventListActivity : AppCompatActivity() {
     //Realmのインスタンスを取得
     var realm: Realm = Realm.getDefaultInstance()
 
+    //年月日を格納する変数
+    private var year = 0
+    private var month = 0
+    private var day = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_daily_event_list)
 
         //CalendarRecyclerViewAdapterから日付情報を受け取る
-        val year = intent.getIntExtra("year", -1)
-        val month = intent.getIntExtra("month", -1)
-        val day = intent.getIntExtra("day", -1)
+        year = intent.getIntExtra("year", -1)
+        month = intent.getIntExtra("month", -1)
+        day = intent.getIntExtra("day", -1)
 
         //labelTextに、表示日をセット 例: "2021年 6月 16日"
         val dateString = year.toString() + "年 " + month.toString() + "月 " + day.toString() + "日"
@@ -44,6 +49,12 @@ class DailyEventListActivity : AppCompatActivity() {
             intent.putExtra("currentDay", day)
             startActivity(intent)
         }
+
+    }
+
+
+    override fun onStart() {
+        super.onStart()
 
         //日付が一致するレコードを検索
         val realmResults = realm.where<Event>()
