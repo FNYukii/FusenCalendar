@@ -1,5 +1,6 @@
 package com.example.y.fusencalendar
 
+import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,6 +14,7 @@ import io.realm.Realm
 import io.realm.kotlin.createObject
 import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.activity_paste_fusen_to_calendar.*
+import kotlinx.android.synthetic.main.fragment_calendar.*
 import java.time.LocalDate
 
 
@@ -58,7 +60,18 @@ class PasteFusenToCalendarActivity :
         //calendarPager02の処理
         calendarPager02.adapter = CustomPagerAdapter(this)
         calendarPager02.setCurrentItem(pageSize / 2,false)
-        calendarPager02.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+
+
+        //SharedPreferenceに保存されているカレンダーのスライド方向の設定値を取得
+        val pref = getSharedPreferences("Setting", Context.MODE_PRIVATE)
+        val slideDirection: Boolean = pref?.getBoolean("SLIDE_DIRECTION", false)!!
+
+        //calendarPagerのスクロール方向を指定
+        if(slideDirection){
+            calendarPager02.orientation = ViewPager2.ORIENTATION_VERTICAL
+        }else{
+            calendarPager02.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        }
 
         //backButton03を押すとfinish()
         backButton03.setOnClickListener {
