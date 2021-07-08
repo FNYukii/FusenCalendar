@@ -72,14 +72,6 @@
             app:srcCompat="@drawable/ic_baseline_delete_24"
             app:tint="@color/weakText" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/headerBorder"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <EditText
