@@ -3,16 +3,18 @@ package com.example.y.fusencalendar
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import io.realm.Realm
 import io.realm.kotlin.createObject
 import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.activity_edit_event.*
+import kotlinx.android.synthetic.main.activity_edit_event.backButton
+import kotlinx.android.synthetic.main.activity_edit_event.deleteButton
+import kotlinx.android.synthetic.main.activity_edit_event.memoEdit
+import kotlinx.android.synthetic.main.activity_edit_event.titleEdit
 
 class EditEventActivity :
     AppCompatActivity(),
@@ -55,11 +57,17 @@ class EditEventActivity :
             title = event.title
             memo = event.memo
 
-
             deleteButton.visibility = View.VISIBLE
         } else{
+            year = intent.getIntExtra("currentYear",0)
+            month = intent.getIntExtra("currentMonth",0)
+            date = intent.getIntExtra("currentDay",0)
             deleteButton.visibility = View.INVISIBLE
         }
+
+        colorChange(colorId)
+
+        dateText.setText(year.toString() + "年" + month.toString() + "月" + date.toString() + "日")
 
         backButton.setOnClickListener{ v: View? ->
             save()
@@ -90,10 +98,6 @@ class EditEventActivity :
             val timePickerDialog = TimePickerDialogFragment()
             timePickerDialog.show(supportFragmentManager, "dialog")
         }
-
-
-
-
     }
 
     override fun onBackPressed() {
@@ -151,6 +155,31 @@ class EditEventActivity :
 
     override fun onDialogColorIdReceive(dialog: DialogFragment, colorId: Int) {
         this.colorId = colorId
+        colorChange(colorId)
+    }
+    fun colorChange(colorId: Int){
+        var backGroundColor = ContextCompat.getColor(this, R.color.blue)
+            when(colorId){
+                0 -> {
+                    backGroundColor = ContextCompat.getColor(this, R.color.blue)
+                }
+                1 -> {
+                    backGroundColor = ContextCompat.getColor(this, R.color.green)
+                }
+                2 -> {
+                    backGroundColor = ContextCompat.getColor(this, R.color.orange)
+                }
+                3 -> {
+                    backGroundColor = ContextCompat.getColor(this, R.color.red)
+                }
+                4 -> {
+                    backGroundColor = ContextCompat.getColor(this, R.color.purple)
+                }
+            }
+        Edit_Event_Layout.setBackgroundColor(backGroundColor)
+        toolBar.setBackgroundColor(backGroundColor)
+        window.statusBarColor = backGroundColor
+        window.navigationBarColor = backGroundColor
     }
 
     override fun selectedDate(year: Int, month: Int, date: Int) {
