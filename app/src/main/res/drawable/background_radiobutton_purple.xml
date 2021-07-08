@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- default -->
+    <item android:state_pressed="false" android:state_checked="false">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/purple" />
+            <corners android:radius="100dp"/>
+        </shape>
+    </item>
+
+    <!-- pressed -->
+    <item android:state_pressed="true" android:state_checked="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/purple" />
+            <corners android:radius="100dp"/>
+        </shape>
+    </item>
+
+    <!-- checked -->
+    <item android:state_pressed="false" android:state_checked="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/purple" />
+            <corners android:radius="100dp"/>
+            <stroke android:width="2dp"
+                    android:color="@color/weakText"/>
+        </shape>
+    </item>
+
+</selector>

@@ -1,15 +1,18 @@
 package com.example.y.fusencalendar
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.app.TimePickerDialog
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.widget.DatePicker
 import android.widget.TimePicker
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import kotlinx.android.synthetic.main.dialog_color.*
 import java.lang.Exception
 import java.util.*
 
@@ -182,17 +185,44 @@ class ColorDialogFragment: DialogFragment(){
     private val colors = arrayOf("青", "緑", "オレンジ", "赤", "紫")
     private var colorId: Int = -1
 
+    @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+
+        val inflater = requireActivity().layoutInflater
 
         //dialogをセッティング
         return activity?.let {
             val builder = android.app.AlertDialog.Builder(it)
-            builder.setTitle("色を選択")
+            builder
+                .setTitle("色を選択")
                 .setSingleChoiceItems(colors, -1){ _, which ->
                     colorId = which
                 }
-                .setPositiveButton("OK"
-                ) { _, _ ->
+//                .setView(inflater.inflate(R.layout.dialog_color, null))
+                .setPositiveButton("OK") { _, _ ->
+
+//                    //選択されているラジオボタンに応じて、colorIdに値を格納
+//                    when(colorRadioGroup?.checkedRadioButtonId){
+//                        R.id.blueRadioButton -> {
+//                            colorId = 0
+//                        }
+//                        R.id.greenRadioButton -> {
+//                            colorId = 1
+//                        }
+//                        R.id.orangeRadioButton -> {
+//                            colorId = 2
+//                        }
+//                        R.id.redRadioButton -> {
+//                            colorId = 3
+//                        }
+//                        R.id.purpleRadioButton -> {
+//                            colorId = 4
+//                        }
+//                        else -> {
+//                            Log.d("hello", "hello ${colorRadioGroup?.checkedRadioButtonId}")
+//                        }
+//                    }
+
                     //ラジオボタンで色が選択されていたら、ホストActivityへcolorIdを渡す
                     if (colorId != -1) {
                         listener?.onDialogColorIdReceive(this, colorId)
@@ -202,6 +232,7 @@ class ColorDialogFragment: DialogFragment(){
                 ) { _, _ ->
                     //do nothing
                 }
+
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }
