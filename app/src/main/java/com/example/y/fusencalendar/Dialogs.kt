@@ -5,8 +5,12 @@ import android.app.DatePickerDialog
 import android.app.Dialog
 import android.app.TimePickerDialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
+import android.view.Window
+import android.view.WindowManager
 import android.widget.DatePicker
 import android.widget.TimePicker
 import android.widget.Toast
@@ -188,53 +192,56 @@ class ColorDialogFragment: DialogFragment(){
     @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
-        val inflater = requireActivity().layoutInflater
+        //dialogを生成
+        val dialog = Dialog(requireContext())
+        val dw = dialog.window
+        dw?.let {
+            it.requestFeature(Window.FEATURE_NO_TITLE)
+            it.setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
+            )
+            it.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+        }
 
-        //dialogをセッティング
-        return activity?.let {
-            val builder = android.app.AlertDialog.Builder(it)
-            builder
-                .setTitle("色を選択")
-                .setSingleChoiceItems(colors, -1){ _, which ->
-                    colorId = which
+        //dialogにカスタムレイアウトをセット
+        dialog.setContentView(R.layout.dialog_color)
+
+        //RadioButtonの選択項目が変化するたび、colorIdに値を格納
+        dialog.colorRadioGroup.setOnCheckedChangeListener{_, checkedId ->
+            when(checkedId){
+                R.id.blueRadioButton -> {
+                    colorId = 0
                 }
-//                .setView(inflater.inflate(R.layout.dialog_color, null))
-                .setPositiveButton("OK") { _, _ ->
-
-//                    //選択されているラジオボタンに応じて、colorIdに値を格納
-//                    when(colorRadioGroup?.checkedRadioButtonId){
-//                        R.id.blueRadioButton -> {
-//                            colorId = 0
-//                        }
-//                        R.id.greenRadioButton -> {
-//                            colorId = 1
-//                        }
-//                        R.id.orangeRadioButton -> {
-//                            colorId = 2
-//                        }
-//                        R.id.redRadioButton -> {
-//                            colorId = 3
-//                        }
-//                        R.id.purpleRadioButton -> {
-//                            colorId = 4
-//                        }
-//                        else -> {
-//                            Log.d("hello", "hello ${colorRadioGroup?.checkedRadioButtonId}")
-//                        }
-//                    }
-
-                    //ラジオボタンで色が選択されていたら、ホストActivityへcolorIdを渡す
-                    if (colorId != -1) {
-                        listener?.onDialogColorIdReceive(this, colorId)
-                    }
+                R.id.greenRadioButton -> {
+                    colorId = 1
                 }
-                .setNegativeButton("キャンセル"
-                ) { _, _ ->
-                    //do nothing
+                R.id.orangeRadioButton -> {
+                    colorId = 2
                 }
+                R.id.redRadioButton -> {
+                    colorId = 3
+                }
+                R.id.purpleRadioButton -> {
+                    colorId = 4
+                }
+            }
+        }
 
-            builder.create()
-        } ?: throw IllegalStateException("Activity cannot be null")
+        //OKが押されたらホストアクティビティへcolorIdを渡して、ダイアログを閉じる
+        dialog.colorDialogPositiveButton.setOnClickListener {
+            if (colorId != -1) {
+                listener?.onDialogColorIdReceive(this, colorId)
+            }
+            dialog.cancel()
+        }
+
+        //キャンセルが押されたら、何もせずダイアログを閉じる
+        dialog.colorDialogNegativeButton.setOnClickListener {
+            dialog.cancel()
+        }
+
+        return dialog
     }
 
     override fun onAttach(context: Context) {
