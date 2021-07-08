@@ -39,10 +39,6 @@ class EditFusenActivity : AppCompatActivity(), ColorDialogFragment.DialogListene
             title = fusen?.title!!
             memo = fusen.memo
             colorId = fusen.colorId
-
-            deleteButton.visibility = View.VISIBLE
-        } else{
-            deleteButton.visibility = View.INVISIBLE
         }
 
         colorChange(colorId)
