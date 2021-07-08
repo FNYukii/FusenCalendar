@@ -56,13 +56,10 @@ class EditEventActivity :
             colorId = event.colorId
             title = event.title
             memo = event.memo
-
-            deleteButton.visibility = View.VISIBLE
         } else{
             year = intent.getIntExtra("currentYear",0)
             month = intent.getIntExtra("currentMonth",0)
             date = intent.getIntExtra("currentDay",0)
-            deleteButton.visibility = View.INVISIBLE
         }
 
         colorChange(colorId)
