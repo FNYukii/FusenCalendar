@@ -17,8 +17,6 @@ import kotlinx.android.synthetic.main.one_calendar_cell.view.*
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-
-
 class CalendarRecyclerViewAdapter(
     private val days: Array<LocalDate?>,
     private val cellHeight: Int,
@@ -62,7 +60,6 @@ class CalendarRecyclerViewAdapter(
         val params: ConstraintLayout.LayoutParams = holder.calendarCellParentLayout.layoutParams as ConstraintLayout.LayoutParams
         params.height = cellHeight
         holder.calendarCellParentLayout.layoutParams = params
-
 
         //TextViewに値をセット
         if(days[position] == null){
@@ -171,7 +168,6 @@ class CalendarRecyclerViewAdapter(
             }
         }
 
-
         //日付がnull以外のセルをタップすると…
         holder.itemView.setOnClickListener {
 
@@ -188,7 +184,6 @@ class CalendarRecyclerViewAdapter(
                 it.context.startActivity(intent)
             }
 
-
             //ホストがPasteFusenToCalendarActivityなら、
             if(days[position] != null && isPasteFusen){
 
@@ -198,11 +193,9 @@ class CalendarRecyclerViewAdapter(
 
             }
 
-
         }
 
     }
-
 
 
 }
