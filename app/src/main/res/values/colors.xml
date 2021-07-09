@@ -30,8 +30,8 @@
 
     <!-- eventやfusenのカードの色 -->
     <color name="blue">#C9E8FF</color>
-    <color name="green">#C9FF87</color>
-    <color name="orange">#FFCE96</color>
+    <color name="green">#D1FF99</color>
+    <color name="yellow">#FFE594</color>
     <color name="red">#FFB4AF</color>
     <color name="purple">#F6C1FF</color>
 

@@ -144,7 +144,7 @@ class EditFusenActivity : AppCompatActivity(), ColorDialogFragment.DialogListene
                 backGroundColor = ContextCompat.getColor(this, R.color.green)
             }
             2 -> {
-                backGroundColor = ContextCompat.getColor(this, R.color.orange)
+                backGroundColor = ContextCompat.getColor(this, R.color.yellow)
             }
             3 -> {
                 backGroundColor = ContextCompat.getColor(this, R.color.red)

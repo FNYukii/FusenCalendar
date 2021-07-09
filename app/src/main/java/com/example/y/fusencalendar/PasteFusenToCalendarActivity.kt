@@ -41,8 +41,6 @@ class PasteFusenToCalendarActivity :
     private var selectedMinute = 0
 
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_paste_fusen_to_calendar)
