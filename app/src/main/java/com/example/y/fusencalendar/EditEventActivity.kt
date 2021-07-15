@@ -81,6 +81,26 @@ class EditEventActivity :
             finish()
         }
 
+        addFusenButton.setOnClickListener{ v:View->
+            if(titleEdit.text.isNotEmpty() || memoEdit.text.isNotEmpty()) {
+                title = titleEdit.text.toString()
+                memo = memoEdit.text.toString()
+
+                realm.executeTransaction {
+                    val maxId = realm.where<Fusen>().max("id")
+                    val nextId = (maxId?.toInt() ?: 0) + 1
+                    val Fusen = realm.createObject<Fusen>(nextId)
+                    Fusen.title = title
+                    Fusen.memo = memo
+                    Fusen.colorId = colorId
+                }
+
+                Toast.makeText(applicationContext, "ふせんに追加しました", Toast.LENGTH_SHORT).show()
+            } else{
+                Toast.makeText(applicationContext, "空のイベントはふせんに追加できません", Toast.LENGTH_SHORT).show()
+            }
+        }
+
         colorButton.setOnClickListener{ v: View? ->
             val colorDialog = ColorDialogFragment()
             colorDialog.show(supportFragmentManager, "dialog")
@@ -154,6 +174,7 @@ class EditEventActivity :
         this.colorId = colorId
         colorChange(colorId)
     }
+
     fun colorChange(colorId: Int){
         var backGroundColor = ContextCompat.getColor(this, R.color.blue)
             when(colorId){
