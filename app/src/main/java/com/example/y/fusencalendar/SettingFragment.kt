@@ -54,6 +54,13 @@ class SettingFragment : Fragment(),SelectNotificationTimeDialogFragment.DialogLi
         //スイッチの初期状態を取得した値に変更する
         switch1.isChecked = switchFlag
 
+        //スイッチの初期状態によってテキストを変更する
+        if (switch1.isChecked){
+            switch1.setText(R.string.slide_direction_horizontal)
+        }else{
+            switch1.setText(R.string.slide_direction_vertical)
+        }
+
         //スライド方向メニューが押された時の処理
         slideText.setOnClickListener {
             //スイッチボタンメニューが表示されていない状態でスライド方向メニューが押された場合
@@ -83,19 +90,21 @@ class SettingFragment : Fragment(),SelectNotificationTimeDialogFragment.DialogLi
         switch1.setOnCheckedChangeListener { buttonView, isChecked ->
             //ボタンがチェックされているとき
             if (isChecked){
+                //スイッチボタンのテキストを変更(横)
+                switch1.setText(R.string.slide_direction_horizontal)
                 //設定を書き込む(縦方向はtrue)
                 editor.putBoolean("SLIDE_DIRECTION",true)
                 //設定を保存する
                 editor.commit()
-                //デバッグ用
-                Log.d("保存確認","縦方向で保存しました")
+
             }else{      //ボタンがチェックされていないとき
+                //スイッチボタンのテキストを変更(縦)
+                switch1.setText(R.string.slide_direction_vertical)
                 //設定を書き込む(横方向はfalse)
                 editor.putBoolean("SLIDE_DIRECTION",false)
                 //設定を保存する
                 editor.commit()
-                //デバッグ用
-                Log.d("保存確認","横方向で保存しました")
+
             }
         }
 
