@@ -3,6 +3,7 @@ package com.example.y.fusencalendar
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -72,10 +73,11 @@ class EditFusenActivity : AppCompatActivity(), ColorDialogFragment.DialogListene
             if(titleEdit.text.isNotEmpty() || memoEdit.text.isNotEmpty()){
                 val intent = Intent(this, PasteFusenToCalendarActivity::class.java)
                 intent.putExtra("fusenId", fusenId)
-                if(fusenId == 0){
-                    intent.putExtra("fusenId", title)
-                    intent.putExtra("fusenId", memo)
-                }
+                title = titleEdit.text.toString()
+                memo = memoEdit.text.toString()
+                intent.putExtra("newFusenTitle", title)
+                intent.putExtra("newFusenMemo", memo)
+                intent.putExtra("newColorId", colorId)
                 startActivity(intent)
             }else{
                 Toast.makeText(applicationContext, "空のふせんはカレンダーに貼り付けられません", Toast.LENGTH_SHORT).show()

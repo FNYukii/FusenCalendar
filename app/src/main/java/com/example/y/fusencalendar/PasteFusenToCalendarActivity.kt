@@ -45,20 +45,18 @@ class PasteFusenToCalendarActivity :
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_paste_fusen_to_calendar)
 
-        //貼りたいふせんの内容を取得する
+        //カレンダーに貼りたいふせんの内容を取得する
         fusenId = intent.getIntExtra("fusenId", 0)
-        val realm = Realm.getDefaultInstance()
-        val realmResult = realm.where<Fusen>()
-            .equalTo("id", fusenId)
-            .findFirst()
-        title = realmResult?.title!!
-        memo = realmResult.memo
-        colorId = realmResult.colorId
+        title = intent.getStringExtra("newFusenTitle") ?: ""
+        memo = intent.getStringExtra("newFusenMemo") ?: ""
+        colorId = intent.getIntExtra("newColorId", 0)
+
+        //Log
+        Log.d("hello", "fusenId: $fusenId, title: $title, memo: $memo, colorId: $colorId")
 
         //calendarPager02の処理
         calendarPager02.adapter = CustomPagerAdapter(this)
         calendarPager02.setCurrentItem(pageSize / 2,false)
-
 
         //SharedPreferenceに保存されているカレンダーのスライド方向の設定値を取得
         val pref = getSharedPreferences("Setting", Context.MODE_PRIVATE)
@@ -131,8 +129,19 @@ class PasteFusenToCalendarActivity :
             event.minute = selectedMinute
         }
 
-        finish()
+        //もしふせんが未登録なら、データベースに登録する
+        if (fusenId == 0){
+            realm.executeTransaction {
+                val maxId = realm.where<Fusen>().max("id")
+                val nextId = (maxId?.toInt() ?: 0) + 1
+                val fusen = realm.createObject<Fusen>(nextId)
+                fusen.title = title
+                fusen.memo = memo
+                fusen.colorId = colorId
+            }
+        }
 
+        finish()
     }
 
 
