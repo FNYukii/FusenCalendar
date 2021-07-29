@@ -29,6 +29,8 @@ class PasteFusenToCalendarActivity :
 
     //イベントとして登録したいふせんの内容
     private var fusenId = 0
+    private var newFusenTitle = ""
+    private var newFusenMemo = ""
     private var title = ""
     private var memo = ""
     private var colorId = 0
@@ -47,13 +49,21 @@ class PasteFusenToCalendarActivity :
 
         //貼りたいふせんの内容を取得する
         fusenId = intent.getIntExtra("fusenId", 0)
-        val realm = Realm.getDefaultInstance()
-        val realmResult = realm.where<Fusen>()
-            .equalTo("id", fusenId)
-            .findFirst()
-        title = realmResult?.title!!
-        memo = realmResult.memo
-        colorId = realmResult.colorId
+        newFusenTitle = intent.getStringExtra("newFusenTitle")!!
+        newFusenMemo = intent.getStringExtra("newFusenMemo")!!
+        Log.d("hello", "fusenId: $fusenId, newFusenTitle: $newFusenTitle, newFusenMemo: $newFusenMemo")
+
+        //ふせんがデータベースに登録済みなら、そのレコードを検索する
+        if (fusenId != 0) {
+            val realm = Realm.getDefaultInstance()
+            val realmResult = realm.where<Fusen>()
+                .equalTo("id", fusenId)
+                .findFirst()
+            title = realmResult?.title!!
+            memo = realmResult.memo
+            colorId = realmResult.colorId
+        }
+
 
         //calendarPager02の処理
         calendarPager02.adapter = CustomPagerAdapter(this)

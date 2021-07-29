@@ -3,6 +3,7 @@ package com.example.y.fusencalendar
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -73,8 +74,10 @@ class EditFusenActivity : AppCompatActivity(), ColorDialogFragment.DialogListene
                 val intent = Intent(this, PasteFusenToCalendarActivity::class.java)
                 intent.putExtra("fusenId", fusenId)
                 if(fusenId == 0){
-                    intent.putExtra("fusenId", title)
-                    intent.putExtra("fusenId", memo)
+                    title = titleEdit.text.toString()
+                    memo = memoEdit.text.toString()
+                    intent.putExtra("newFusenTitle", title)
+                    intent.putExtra("newFusenMemo", memo)
                 }
                 startActivity(intent)
             }else{
