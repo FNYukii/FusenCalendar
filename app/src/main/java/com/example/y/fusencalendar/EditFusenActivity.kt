@@ -73,12 +73,11 @@ class EditFusenActivity : AppCompatActivity(), ColorDialogFragment.DialogListene
             if(titleEdit.text.isNotEmpty() || memoEdit.text.isNotEmpty()){
                 val intent = Intent(this, PasteFusenToCalendarActivity::class.java)
                 intent.putExtra("fusenId", fusenId)
-                if(fusenId == 0){
-                    title = titleEdit.text.toString()
-                    memo = memoEdit.text.toString()
-                    intent.putExtra("newFusenTitle", title)
-                    intent.putExtra("newFusenMemo", memo)
-                }
+                title = titleEdit.text.toString()
+                memo = memoEdit.text.toString()
+                intent.putExtra("newFusenTitle", title)
+                intent.putExtra("newFusenMemo", memo)
+                intent.putExtra("newColorId", colorId)
                 startActivity(intent)
             }else{
                 Toast.makeText(applicationContext, "空のふせんはカレンダーに貼り付けられません", Toast.LENGTH_SHORT).show()

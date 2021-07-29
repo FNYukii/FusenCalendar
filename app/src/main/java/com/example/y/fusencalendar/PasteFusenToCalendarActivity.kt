@@ -29,8 +29,6 @@ class PasteFusenToCalendarActivity :
 
     //イベントとして登録したいふせんの内容
     private var fusenId = 0
-    private var newFusenTitle = ""
-    private var newFusenMemo = ""
     private var title = ""
     private var memo = ""
     private var colorId = 0
@@ -47,28 +45,18 @@ class PasteFusenToCalendarActivity :
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_paste_fusen_to_calendar)
 
-        //貼りたいふせんの内容を取得する
+        //カレンダーに貼りたいふせんの内容を取得する
         fusenId = intent.getIntExtra("fusenId", 0)
-        newFusenTitle = intent.getStringExtra("newFusenTitle")!!
-        newFusenMemo = intent.getStringExtra("newFusenMemo")!!
-        Log.d("hello", "fusenId: $fusenId, newFusenTitle: $newFusenTitle, newFusenMemo: $newFusenMemo")
+        title = intent.getStringExtra("newFusenTitle") ?: ""
+        memo = intent.getStringExtra("newFusenMemo") ?: ""
+        colorId = intent.getIntExtra("newColorId", 0)
 
-        //ふせんがデータベースに登録済みなら、そのレコードを検索する
-        if (fusenId != 0) {
-            val realm = Realm.getDefaultInstance()
-            val realmResult = realm.where<Fusen>()
-                .equalTo("id", fusenId)
-                .findFirst()
-            title = realmResult?.title!!
-            memo = realmResult.memo
-            colorId = realmResult.colorId
-        }
-
+        //Log
+        Log.d("hello", "fusenId: $fusenId, title: $title, memo: $memo, colorId: $colorId")
 
         //calendarPager02の処理
         calendarPager02.adapter = CustomPagerAdapter(this)
         calendarPager02.setCurrentItem(pageSize / 2,false)
-
 
         //SharedPreferenceに保存されているカレンダーのスライド方向の設定値を取得
         val pref = getSharedPreferences("Setting", Context.MODE_PRIVATE)
