@@ -39,6 +39,7 @@ class CalendarFragment : Fragment() {
 
         //SharedPreferenceに保存されているカレンダーのスライド方向の設定値を取得
         val pref = activity?.getSharedPreferences("Setting", Context.MODE_PRIVATE)
+        //スライドの初期値は横
         val slideDirection: Boolean = pref?.getBoolean("SLIDE_DIRECTION", false)!!
 
         //calendarPagerのスクロール方向を指定
