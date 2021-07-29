@@ -24,6 +24,8 @@ class EditFusenActivity : AppCompatActivity(), ColorDialogFragment.DialogListene
     var memo: String = ""
     var colorId: Int = 0
 
+    var nextId = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_fusen)
@@ -39,12 +41,18 @@ class EditFusenActivity : AppCompatActivity(), ColorDialogFragment.DialogListene
             title = fusen?.title!!
             memo = fusen.memo
             colorId = fusen.colorId
+        }else{
+            val maxId = realm.where<Fusen>().max("id")
+            nextId = (maxId?.toInt() ?: 0) + 1
         }
+
         colorChange(colorId)
 
         backButton.setOnClickListener{ v: View? ->
             save()
-            Toast.makeText(applicationContext, "保存しました", Toast.LENGTH_SHORT).show()
+            if(titleEdit.text.isNotEmpty() || memoEdit.text.isNotEmpty()) {
+                Toast.makeText(applicationContext, "保存しました", Toast.LENGTH_SHORT).show()
+            }
             finish()
         }
 
@@ -61,9 +69,17 @@ class EditFusenActivity : AppCompatActivity(), ColorDialogFragment.DialogListene
 
         //eventButtonを押すと、ふせんをカレンダーに貼るために日時を選択するActivityへ遷移する
         eventButton.setOnClickListener {
-            val intent = Intent(this, PasteFusenToCalendarActivity::class.java)
-            intent.putExtra("fusenId", fusenId)
-            startActivity(intent)
+            if(titleEdit.text.isNotEmpty() || memoEdit.text.isNotEmpty()){
+                val intent = Intent(this, PasteFusenToCalendarActivity::class.java)
+                intent.putExtra("fusenId", fusenId)
+                if(fusenId == 0){
+                    intent.putExtra("fusenId", title)
+                    intent.putExtra("fusenId", memo)
+                }
+                startActivity(intent)
+            }else{
+                Toast.makeText(applicationContext, "空のふせんはカレンダーに貼り付けられません", Toast.LENGTH_SHORT).show()
+            }
         }
 
         colorButton02.setOnClickListener{ v: View? ->
@@ -90,7 +106,9 @@ class EditFusenActivity : AppCompatActivity(), ColorDialogFragment.DialogListene
     override fun onBackPressed() {
         super.onBackPressed()
         save()
-        Toast.makeText(applicationContext, "保存しました", Toast.LENGTH_SHORT).show()
+        if(titleEdit.text.isNotEmpty() || memoEdit.text.isNotEmpty()) {
+            Toast.makeText(applicationContext, "保存しました", Toast.LENGTH_SHORT).show()
+        }
         finish()
     }
 
