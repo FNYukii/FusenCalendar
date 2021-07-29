@@ -129,8 +129,19 @@ class PasteFusenToCalendarActivity :
             event.minute = selectedMinute
         }
 
-        finish()
+        //もしふせんが未登録なら、データベースに登録する
+        if (fusenId == 0){
+            realm.executeTransaction {
+                val maxId = realm.where<Fusen>().max("id")
+                val nextId = (maxId?.toInt() ?: 0) + 1
+                val fusen = realm.createObject<Fusen>(nextId)
+                fusen.title = title
+                fusen.memo = memo
+                fusen.colorId = colorId
+            }
+        }
 
+        finish()
     }
 
 
