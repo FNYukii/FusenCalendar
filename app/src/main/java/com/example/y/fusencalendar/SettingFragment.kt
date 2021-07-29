@@ -19,7 +19,7 @@ class SettingFragment : Fragment(),SelectNotificationTimeDialogFragment.DialogLi
     private var flag = false
 
     //スイッチの状態フラグ初期値は縦(true)
-    private var switchFlag = true
+    private var switchFlag = false
 
     var timeId :Int = -1
 
@@ -49,10 +49,12 @@ class SettingFragment : Fragment(),SelectNotificationTimeDialogFragment.DialogLi
         //プレファレンスのファイルに書き込むEditorのインスタンスを取得
         val editor = pref!!.edit()
 
-        //プレファレンスからスイッチの状態を取得してスイッチの初期状態を変更する(初期値はtrue)
-        switchFlag = pref!!.getBoolean("SLIDE_DIRECTION",true)
+        //プレファレンスからスイッチの状態を取得してスイッチの初期状態を変更する(初期値はfalse)
+        switchFlag = pref!!.getBoolean("SLIDE_DIRECTION",false)
         //スイッチの初期状態を取得した値に変更する
         switch1.isChecked = switchFlag
+
+        Log.d("スイッチの状態確認", switchFlag.toString())
 
         //スイッチの初期状態によってテキストを変更する
         if (switch1.isChecked){
