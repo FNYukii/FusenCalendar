@@ -246,8 +246,10 @@ class ColorDialogFragment: DialogFragment(){
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        Log.d("処理確認","colorDialogのonAttachが呼ばれました")
         try {
             listener = context as DialogListener
+            Log.d("処理確認","リスナーをホストに配信")
         }catch (e: Exception){
             Toast.makeText(this.context, "Error! Can not find listener", Toast.LENGTH_SHORT).show()
         }
@@ -262,18 +264,17 @@ class ColorDialogFragment: DialogFragment(){
 
 
 //時刻を選択するダイアログ
-class SelectNotificationTimeDialogFragment: DialogFragment(){
+class SelectNotificationTimeDialogFragment(private var timeId: Int): DialogFragment(){
 
 
     //EditActivityへTimeIdを渡すためのインターフェース
-    interface DialogListener{
+    interface TimeDialogListener{
         fun onDialogTimeIdReceive(dialog: DialogFragment, timeId: Int)
     }
-    private var listener:DialogListener? = null
+    private var listener:TimeDialogListener? = null
 
     //配列や変数を宣言
-    private val colors = arrayOf("なし", "５分", "１０分", "３０分", "１時間","２時間")
-    private var timeId: Int = -1
+    private val timeList = arrayOf("なし", "５分", "１０分", "３０分", "１時間","２時間")
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
@@ -281,30 +282,38 @@ class SelectNotificationTimeDialogFragment: DialogFragment(){
         return activity?.let {
             val builder = android.app.AlertDialog.Builder(it)
             builder.setTitle("通知時間を選択")
-                .setSingleChoiceItems(colors, -1){ _, which ->
+                .setSingleChoiceItems(timeList, timeId){ _, which ->
                     timeId = which
                 }
                 .setPositiveButton("OK"
                 ) { _, _ ->
                     //ラジオボタンで時間が選択されていたら、ホストActivityへTimeIdを渡す
                     if (timeId != -1) {
+
                         listener?.onDialogTimeIdReceive(this, timeId)
+                        dialog?.dismiss()
                     }
                 }
                 .setNegativeButton("キャンセル"
                 ) { _, _ ->
                     //do nothing
+                    dialog?.dismiss()
                 }
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
+
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        try {
-            listener = context as DialogListener
-        }catch (e: Exception){
-            Toast.makeText(this.context, "Error! Can not find listener", Toast.LENGTH_SHORT).show()
+        /*Fragumentはcontextを継承しないのでActivityのインスタンスになる
+         *FrabmentとDialogとやり取りを行う場合Dialogを子とし呼び出し元のFragumentを親とした
+         *入れ子状ののDialogとすることで値のやり取りが可能になる
+         */
+        when{
+            context is TimeDialogListener -> listener = context
+            //親のフラグメントにアクセスするためのparentFragment
+            parentFragment is TimeDialogListener -> listener = parentFragment as TimeDialogListener
         }
     }
 

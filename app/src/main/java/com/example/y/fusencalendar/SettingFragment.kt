@@ -12,7 +12,7 @@ import androidx.fragment.app.DialogFragment
 import kotlinx.android.synthetic.main.fragment_setting.*
 
 
-class SettingFragment : Fragment(),SelectNotificationTimeDialogFragment.DialogListener {
+class SettingFragment : Fragment(),SelectNotificationTimeDialogFragment.TimeDialogListener {
 
     private var pref : SharedPreferences? = null
     //スイッチボタンメニューの状態フラグ
@@ -21,6 +21,7 @@ class SettingFragment : Fragment(),SelectNotificationTimeDialogFragment.DialogLi
     //スイッチの状態フラグ初期値は縦(true)
     private var switchFlag = true
 
+    //通知時間、初期値は-1(未選択状態の値)
     var timeId :Int = -1
 
     override fun onCreateView(
@@ -111,8 +112,12 @@ class SettingFragment : Fragment(),SelectNotificationTimeDialogFragment.DialogLi
 
         //通知メニューをタップした時の処理
         alarmText.setOnClickListener {v: View? ->
-            val timeDialog = SelectNotificationTimeDialogFragment()
-            timeDialog.show(parentFragmentManager, "select_time_dialog")
+            //プレファレンスから値を取得
+            timeId = pref!!.getInt("TIME_ID",-1)
+            //ダイアログに選択値を渡す
+            val timeDialog = SelectNotificationTimeDialogFragment(timeId)
+            //ダイアログを表示(値のやり取りを行うためにchildFragmentManagerで子として呼び出す)
+            timeDialog.show(childFragmentManager, "select_time_dialog")
         }
 
         //ヘルプメニューをタップした時の処理
@@ -135,8 +140,14 @@ class SettingFragment : Fragment(),SelectNotificationTimeDialogFragment.DialogLi
         }
     }
 
+    //インタフェースの実装選択した時間を受け取る
     override fun onDialogTimeIdReceive(dialog: DialogFragment, timeId: Int) {
         this.timeId = timeId
+        //プレファレンスに設定を書き込むためのeditインスタンスの取得
+        val editor = pref?.edit()
+        //プレファレンスに設定を書き込む
+        editor?.putInt("TIME_ID",timeId)
+        //設定を保存
+        editor?.commit()
     }
-
 }
