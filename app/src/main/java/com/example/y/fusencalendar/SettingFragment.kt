@@ -124,7 +124,7 @@ class SettingFragment : Fragment(),SelectNotificationTimeDialogFragment.TimeDial
 
         //ヘルプメニューをタップした時の処理
         helpText.setOnClickListener {
-            val dialog = ConfirmDialog("キャンセルしますか？","キャンセル",{
+            val dialog = ConfirmDialog("準備中です。","キャンセル",{
 
             },"戻る",{})
             dialog.show(parentFragmentManager,"colorselectdialog")
